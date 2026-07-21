@@ -7,7 +7,7 @@ export function CTA() {
         Comece gratuitamente
       </h2>
 
-      <Button text="Criar Conta" />
+      <Button text="Criar Conta" variant="primary" />
     </section>
   )
 }

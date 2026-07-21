@@ -9,7 +9,7 @@ export function Navbar() {
           <h2 className="text-xs text-blue-500">Gerencie suas tarefas</h2>
         </div>
 
-        <Button text="Entrar" />
+        <Button text="Entrar" variant="primary" />
       </div>
     </header>
   );
