@@ -1,13 +1,13 @@
+import { Button } from "@/components/ui/button"
+
 export function CTA() {
   return (
     <section className="px-6 py-20 text-center">
-      <h2 className="text-4xl font-bold">
+      <h2 className="text-4xl font-bold mb-6 ">
         Comece gratuitamente
       </h2>
 
-      <button className="mt-6 rounded-xl bg-blue-600 px-8 py-4 text-white hover:bg-blue-700">
-        Criar Conta
-      </button>
+      <Button text="Criar Conta" />
     </section>
   )
 }
