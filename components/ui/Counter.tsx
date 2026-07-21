@@ -11,7 +11,10 @@ export function Counter() {
         {count}
       </h2>
 
-      <button onClick={() => setCount(count + 1)} className="rounded-xl bg-blue-600 px-6 py-3 text-white">
+      <button
+        onClick={() => setCount((prevCount) => prevCount + 1)}
+        className="rounded-xl bg-blue-600 px-6 py-3 text-white"
+      >
         +
       </button>
     </div>
