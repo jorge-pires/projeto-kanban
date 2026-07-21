@@ -1,8 +1,8 @@
-import { Navbar } from "@/components/landing/navbar"
-import { Hero } from "@/components/landing/hero"
-import { Features } from "@/components/landing/features"
-import { CTA } from "@/components/landing/cta"
-import { Footer } from "@/components/landing/footer"
+import { Navbar } from "@/components/landing/Navbar"
+import { Hero } from "@/components/landing/Hero"
+import { Features } from "@/components/landing/Features"
+import { CTA } from "@/components/landing/Cta"
+import { Footer } from "@/components/landing/Footer"
 
 export default function Home() {
   return (
