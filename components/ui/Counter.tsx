@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 
+import { Button } from "@/components/ui/Button"
+
 export function Counter() {
   const [count, setCount] = useState(0)
 
@@ -24,26 +26,28 @@ export function Counter() {
       </h2>
 
       <div className="flex items-center gap-3">
-        <button
+        <Button
+          text="-"
+          variant="secondary"
+          size="md"
           onClick={decrement}
-          className="rounded-xl bg-gray-600 px-6 py-3 text-white transition hover:bg-gray-700"
-        >
-          -
-        </button>
+          aria-label="Diminuir contador"
+        />
 
-        <button
+        <Button
+          text="Reset"
+          variant="secondary"
+          size="md"
           onClick={reset}
-          className="rounded-xl bg-gray-600 px-6 py-3 text-white transition hover:bg-gray-700"
-        >
-          Reset
-        </button>
+        />
 
-        <button
+        <Button
+          text="+"
+          variant="primary"
+          size="md"
           onClick={increment}
-          className="rounded-xl bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700"
-        >
-          +
-        </button>
+          aria-label="Aumentar contador"
+        />
       </div>
     </div>
   )
