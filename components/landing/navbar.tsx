@@ -46,12 +46,12 @@ export function Navbar() {
       </div>
 
       {isMenuOpen && (
-        <nav className="border-t px-6 py-4 md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col gap-4">
+        <nav className="border-t bg-gray-50 px-6 py-4 md:hidden">
+          <div className="mx-auto flex max-w-6xl flex-col gap-2">
             <a
               href="#home"
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-blue-600"
+              className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
             >
               Início
             </a>
@@ -59,7 +59,7 @@ export function Navbar() {
             <a
               href="#features"
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-blue-600"
+              className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
             >
               Recursos
             </a>
@@ -67,12 +67,18 @@ export function Navbar() {
             <a
               href="#about"
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-blue-600"
+              className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
             >
               Sobre
             </a>
 
-            <Button text="Entrar" variant="primary" size="sm" />
+            <Button
+              text="Entrar"
+              variant="primary"
+              size="sm"
+              className="mt-2 w-full"
+              onClick={() => setIsMenuOpen(false)}
+            />
           </div>
         </nav>
       )}
