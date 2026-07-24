@@ -4,6 +4,21 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 
+const navigationLinks = [
+  {
+    label: "Início",
+    href: "#home",
+  },
+  {
+    label: "Recursos",
+    href: "#features",
+  },
+  {
+    label: "Sobre",
+    href: "#about",
+  },
+];
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -17,17 +32,15 @@ export function Navbar() {
         <h1 className="text-xl font-bold">TaskFlow</h1>
 
         <nav className="hidden items-center gap-6 md:flex">
-          <a href="#home" className="hover:text-blue-600">
-            Início
-          </a>
-
-          <a href="#features" className="hover:text-blue-600">
-            Recursos
-          </a>
-
-          <a href="#about" className="hover:text-blue-600">
-            Sobre
-          </a>
+          {navigationLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="transition hover:text-blue-600"
+            >
+              {link.label}
+            </a>
+          ))}
 
           <Button text="Entrar" variant="primary" size="sm" />
         </nav>
