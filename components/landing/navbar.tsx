@@ -61,29 +61,16 @@ export function Navbar() {
       {isMenuOpen && (
         <nav className="border-t bg-gray-50 px-6 py-4 md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-2">
-            <a
-              href="#home"
-              onClick={() => setIsMenuOpen(false)}
-              className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
-            >
-              Início
-            </a>
-
-            <a
-              href="#features"
-              onClick={() => setIsMenuOpen(false)}
-              className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
-            >
-              Recursos
-            </a>
-
-            <a
-              href="#about"
-              onClick={() => setIsMenuOpen(false)}
-              className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
-            >
-              Sobre
-            </a>
+            {navigationLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
+              >
+                {link.label}
+              </a>
+            ))}
 
             <Button
               text="Entrar"
