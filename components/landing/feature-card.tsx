@@ -10,7 +10,7 @@ export function FeatureCard({
   highlighted = false,
 }: FeatureCardProps) {
   const highlightedStyles = highlighted
-    ? "border-blue-600 bg-blue-400"
+    ? "border-blue-600 bg-blue-300"
     : "border-gray-200 bg-white"
 
   return (
@@ -26,6 +26,12 @@ export function FeatureCard({
         ${highlightedStyles}
       `}
     >
+      {highlighted && (
+        <span className="mb-4 inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
+          Destaque
+        </span>
+      )}
+
       <h3 className="text-xl font-semibold">
         {title}
       </h3>
