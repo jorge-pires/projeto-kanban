@@ -7,7 +7,7 @@ interface FeatureCardProps {
 export function FeatureCard({
   title,
   description,
-  highlighted,
+  highlighted = false,
 }: FeatureCardProps) {
   const highlightedStyles = highlighted
     ? "border-blue-600 bg-blue-400"
