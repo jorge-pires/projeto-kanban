@@ -1,3 +1,5 @@
+import { FeatureCard } from "@/components/landing/feature-card";
+
 const features = [
   {
     id: 1,
@@ -32,11 +34,11 @@ export function Features() {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {features.map((feature) => (
-          <article key={feature.id} className="rounded-xl border p-6 shadow-sm">
-            <h3 className="text-xl font-semibold">{feature.title}</h3>
-
-            <p className="mt-3 text-gray-600">{feature.description}</p>
-          </article>
+          <FeatureCard
+            key={feature.id}
+            title={feature.title}
+            description={feature.description}
+          />
         ))}
       </div>
     </section>
