@@ -1,6 +1,12 @@
 import { FeatureCard } from "@/components/landing/feature-card";
 
-const features = [
+interface Feature {
+  id: number
+  title: string
+  description: string
+}
+
+const features: Feature[] = [
   {
     id: 1,
     title: "Organize tarefas",
