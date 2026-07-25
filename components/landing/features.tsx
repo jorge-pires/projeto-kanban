@@ -1,9 +1,10 @@
 import { FeatureCard } from "@/components/landing/feature-card";
 
 interface Feature {
-  id: number
-  title: string
-  description: string
+  id: number;
+  title: string;
+  description: string;
+  highlighted?: boolean;
 }
 
 const features: Feature[] = [
@@ -12,6 +13,7 @@ const features: Feature[] = [
     title: "Organize tarefas",
     description:
       "Centralize suas atividades em um quadro visual simples e organizado.",
+    highlighted: true,
   },
   {
     id: 2,
@@ -44,6 +46,7 @@ export function Features() {
             key={feature.id}
             title={feature.title}
             description={feature.description}
+            highlighted={feature.highlighted}
           />
         ))}
       </div>
