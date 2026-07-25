@@ -17,34 +17,28 @@ const features = [
     description:
       "Mantenha o foco nas tarefas mais importantes e reduza a desorganização.",
   },
-]
+  {
+    id: 4,
+    title: "Acesse em qualquer dispositivo",
+    description:
+      "Use o TaskFlow no computador, tablet ou celular com uma interface responsiva.",
+  },
+];
 
 export function Features() {
   return (
-    <section
-      id="features"
-      className="mx-auto max-w-6xl px-6 py-20"
-    >
-      <h2 className="mb-10 text-center text-3xl font-bold">
-        Recursos
-      </h2>
+    <section id="features" className="mx-auto max-w-6xl px-6 py-20">
+      <h2 className="mb-10 text-center text-3xl font-bold">Recursos</h2>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {features.map((feature) => (
-          <article
-            key={feature.id}
-            className="rounded-xl border p-6 shadow-sm"
-          >
-            <h3 className="text-xl font-semibold">
-              {feature.title}
-            </h3>
+          <article key={feature.id} className="rounded-xl border p-6 shadow-sm">
+            <h3 className="text-xl font-semibold">{feature.title}</h3>
 
-            <p className="mt-3 text-gray-600">
-              {feature.description}
-            </p>
+            <p className="mt-3 text-gray-600">{feature.description}</p>
           </article>
         ))}
       </div>
     </section>
-  )
+  );
 }
