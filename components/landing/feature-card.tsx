@@ -2,15 +2,17 @@ interface FeatureCardProps {
   title: string
   description: string
   highlighted?: boolean
+  badgeText?: string
 }
 
 export function FeatureCard({
   title,
   description,
   highlighted = false,
+  badgeText,
 }: FeatureCardProps) {
   const highlightedStyles = highlighted
-    ? "border-blue-600 bg-blue-300"
+    ? "border-blue-600 bg-blue-50"
     : "border-gray-200 bg-white"
 
   return (
@@ -26,9 +28,9 @@ export function FeatureCard({
         ${highlightedStyles}
       `}
     >
-      {highlighted && (
+      {highlighted && badgeText && (
         <span className="mb-4 inline-block rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
-          Destaque
+          {badgeText}
         </span>
       )}
 

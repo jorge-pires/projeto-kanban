@@ -5,6 +5,7 @@ interface Feature {
   title: string;
   description: string;
   highlighted?: boolean;
+  badgeText?: string;
 }
 
 const features: Feature[] = [
@@ -14,6 +15,7 @@ const features: Feature[] = [
     description:
       "Centralize suas atividades em um quadro visual simples e organizado.",
     highlighted: true,
+    badgeText: "Mais popular",
   },
   {
     id: 2,
@@ -47,6 +49,7 @@ export function Features() {
             title={feature.title}
             description={feature.description}
             highlighted={feature.highlighted}
+            badgeText={feature.badgeText}
           />
         ))}
       </div>
