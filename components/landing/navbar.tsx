@@ -1,9 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
-import { Button } from "@/components/ui/Button"
-import { navigationLinks } from "@/data/navigation"
+import { Button } from "@/components/ui/Button";
+import { navigationLinks } from "@/data/navigation";
+import { NavigationLink } from "@/components/navigation/navigation-link";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,13 +24,9 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-6 md:flex">
           {navigationLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="transition hover:text-blue-600"
-            >
+            <NavigationLink key={link.href} href={link.href}>
               {link.label}
-            </a>
+            </NavigationLink>
           ))}
 
           <Button variant="primary" size="sm">
