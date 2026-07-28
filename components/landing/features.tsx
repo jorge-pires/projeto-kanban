@@ -1,11 +1,12 @@
-import { FeatureCard } from "@/components/landing/feature-card";
+import { FeatureCard } from "@/components/landing/feature-card"
+import { Section } from "@/components/layout/section"
 
 interface Feature {
-  id: number;
-  title: string;
-  description: string;
-  highlighted?: boolean;
-  badgeText?: string;
+  id: number
+  title: string
+  description: string
+  highlighted?: boolean
+  badgeText?: string
 }
 
 const features: Feature[] = [
@@ -35,12 +36,14 @@ const features: Feature[] = [
     description:
       "Use o TaskFlow no computador, tablet ou celular com uma interface responsiva.",
   },
-];
+]
 
 export function Features() {
   return (
-    <section id="features" className="mx-auto max-w-6xl px-6 py-20">
-      <h2 className="mb-10 text-center text-3xl font-bold">Recursos</h2>
+    <Section id="features">
+      <h2 className="mb-10 text-center text-3xl font-bold">
+        Recursos
+      </h2>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {features.map((feature) => (
@@ -53,6 +56,6 @@ export function Features() {
           />
         ))}
       </div>
-    </section>
-  );
+    </Section>
+  )
 }
