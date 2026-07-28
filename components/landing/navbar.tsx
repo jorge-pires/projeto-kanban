@@ -1,23 +1,9 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
-import { Button } from "@/components/ui/Button";
-
-const navigationLinks = [
-  {
-    label: "Início",
-    href: "#home",
-  },
-  {
-    label: "Recursos",
-    href: "#features",
-  },
-  {
-    label: "Sobre",
-    href: "#about",
-  },
-];
+import { Button } from "@/components/ui/Button"
+import { navigationLinks } from "@/data/navigation"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
