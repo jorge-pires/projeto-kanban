@@ -40,11 +40,10 @@ const features: Feature[] = [
 
 export function Features() {
   return (
-    <Section id="features">
-      <h2 className="mb-10 text-center text-3xl font-bold">
-        Recursos
-      </h2>
-
+    <Section
+      id="features"
+      title="Recursos"
+    >
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {features.map((feature) => (
           <FeatureCard
