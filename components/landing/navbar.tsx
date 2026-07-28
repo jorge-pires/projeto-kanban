@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/Button";
 
 const navigationLinks = [
   {
@@ -17,25 +17,23 @@ const navigationLinks = [
     label: "Sobre",
     href: "#about",
   },
-]
+];
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function toggleMenu() {
-    setIsMenuOpen((previousState) => !previousState)
+    setIsMenuOpen((previousState) => !previousState);
   }
 
   function closeMenu() {
-    setIsMenuOpen(false)
+    setIsMenuOpen(false);
   }
 
   return (
     <header className="border-b">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <h1 className="text-xl font-bold">
-          TaskFlow
-        </h1>
+        <h1 className="text-xl font-bold">TaskFlow</h1>
 
         <nav className="hidden items-center gap-6 md:flex">
           {navigationLinks.map((link) => (
@@ -48,11 +46,9 @@ export function Navbar() {
             </a>
           ))}
 
-          <Button
-            text="Entrar"
-            variant="primary"
-            size="sm"
-          />
+          <Button variant="primary" size="sm">
+            Entrar
+          </Button>
         </nav>
 
         <button
@@ -62,9 +58,7 @@ export function Navbar() {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           aria-label={
-            isMenuOpen
-              ? "Fechar menu de navegação"
-              : "Abrir menu de navegação"
+            isMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"
           }
         >
           {isMenuOpen ? "Fechar" : "Menu"}
@@ -89,15 +83,16 @@ export function Navbar() {
             ))}
 
             <Button
-              text="Entrar"
               variant="primary"
               size="sm"
               className="mt-2 w-full"
               onClick={closeMenu}
-            />
+            >
+              Entrar
+            </Button>
           </div>
         </nav>
       )}
     </header>
-  )
+  );
 }

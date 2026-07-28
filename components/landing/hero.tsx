@@ -11,7 +11,9 @@ export function Hero() {
         Um Kanban moderno para acompanhar seu trabalho e aumentar sua produtividade.
       </p>
 
-      <Button text="Começar Agora" variant="secondary" size="lg" />
+      <Button variant="secondary" size="lg">
+        Começar Agora
+      </Button>
     </section>
   )
 }
