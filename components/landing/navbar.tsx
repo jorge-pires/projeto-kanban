@@ -55,14 +55,14 @@ export function Navbar() {
         >
           <div className="mx-auto flex max-w-6xl flex-col gap-2">
             {navigationLinks.map((link) => (
-              <a
+              <NavigationLink
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="w-full rounded-lg px-4 py-3 transition hover:bg-gray-200 hover:text-blue-600"
+                className="w-full rounded-lg px-4 py-3 hover:bg-gray-200"
               >
                 {link.label}
-              </a>
+              </NavigationLink>
             ))}
 
             <Button
