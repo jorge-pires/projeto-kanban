@@ -27,8 +27,7 @@ export function Navbar() {
             <NavigationLink
               key={link.href}
               href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noopener noreferrer" : undefined}
+              external={link.external}
             >
               {link.label}
             </NavigationLink>
@@ -63,8 +62,7 @@ export function Navbar() {
               <NavigationLink
                 key={link.href}
                 href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
+                external={link.external}
                 onClick={closeMenu}
                 className="w-full rounded-lg px-4 py-3 hover:bg-gray-200"
               >
