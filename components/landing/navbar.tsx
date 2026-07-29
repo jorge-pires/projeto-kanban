@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 import { navigationLinks } from "@/data/navigation";
 import { NavigationLink } from "@/components/navigation/navigation-link";
 
@@ -33,9 +33,12 @@ export function Navbar() {
             </NavigationLink>
           ))}
 
-          <Button variant="primary" size="sm">
+          <Link
+            href="/login"
+            className="rounded-xl bg-blue-600 px-3 py-2 text-sm text-white transition hover:bg-blue-700"
+          >
             Entrar
-          </Button>
+          </Link>
         </nav>
 
         <button
@@ -70,14 +73,13 @@ export function Navbar() {
               </NavigationLink>
             ))}
 
-            <Button
-              variant="primary"
-              size="sm"
-              className="mt-2 w-full"
+            <Link
+              href="/login"
               onClick={closeMenu}
+              className="mt-2 w-full rounded-xl bg-blue-600 px-3 py-2 text-center text-sm text-white transition hover:bg-blue-700"
             >
               Entrar
-            </Button>
+            </Link>
           </div>
         </nav>
       )}
