@@ -24,7 +24,12 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-6 md:flex">
           {navigationLinks.map((link) => (
-            <NavigationLink key={link.href} href={link.href}>
+            <NavigationLink
+              key={link.href}
+              href={link.href}
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
+            >
               {link.label}
             </NavigationLink>
           ))}
@@ -58,6 +63,8 @@ export function Navbar() {
               <NavigationLink
                 key={link.href}
                 href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 onClick={closeMenu}
                 className="w-full rounded-lg px-4 py-3 hover:bg-gray-200"
               >
