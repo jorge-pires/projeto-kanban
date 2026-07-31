@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { NavigationLink } from "@/components/navigation/navigation-link";
 import { navigationLinks } from "@/data/navigation";
+import { ButtonLink } from "@/components/ui/button-link";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,12 +36,9 @@ export function Navbar() {
             </NavigationLink>
           ))}
 
-          <Link
-            href="/login"
-            className="rounded-xl bg-blue-600 px-3 py-2 text-sm text-white transition hover:bg-blue-700"
-          >
+          <ButtonLink href="/login" size="sm">
             Entrar
-          </Link>
+          </ButtonLink>
         </nav>
 
         <button
@@ -75,13 +73,14 @@ export function Navbar() {
               </NavigationLink>
             ))}
             2
-            <Link
+            <ButtonLink
               href="/login"
+              size="sm"
               onClick={closeMenu}
-              className="mt-2 w-full rounded-xl bg-blue-600 px-3 py-2 text-center text-sm text-white transition hover:bg-blue-700"
+              className="mt-2 w-full"
             >
               Entrar
-            </Link>
+            </ButtonLink>
           </div>
         </nav>
       )}
