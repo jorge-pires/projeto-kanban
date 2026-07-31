@@ -1,10 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
-import Link from "next/link";
-import { navigationLinks } from "@/data/navigation";
 import { NavigationLink } from "@/components/navigation/navigation-link";
+import { navigationLinks } from "@/data/navigation";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +20,9 @@ export function Navbar() {
   return (
     <header className="border-b">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <h1 className="text-xl font-bold">TaskFlow</h1>
+        <Link href="/" className="text-xl font-bold">
+          TaskFlow
+        </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
           {navigationLinks.map((link) => (
@@ -72,7 +74,7 @@ export function Navbar() {
                 {link.label}
               </NavigationLink>
             ))}
-
+            2
             <Link
               href="/login"
               onClick={closeMenu}
