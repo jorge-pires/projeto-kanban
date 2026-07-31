@@ -1,19 +1,34 @@
-import { Button } from "@/components/ui/Button"
+import { ButtonLink } from "@/components/ui/button-link"
 
 export function Hero() {
   return (
-    <section className="flex min-h-[80vh] flex-col items-center justify-center px-6 text-center">
-      <h1 className="max-w-4xl text-5xl font-bold md:text-7xl">
-        Organize suas tarefas sem complicação
+    <section
+      id="home"
+      className="mx-auto max-w-6xl px-6 py-24 text-center"
+    >
+      <h1 className="text-4xl font-bold md:text-6xl">
+        Organize suas tarefas com o TaskFlow
       </h1>
 
-      <p className="mt-6 max-w-2xl text-lg text-gray-500 mb-8">
-        Um Kanban moderno para acompanhar seu trabalho e aumentar sua produtividade.
+      <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+        Uma forma simples e visual de acompanhar suas atividades e manter o foco no que realmente importa.
       </p>
 
-      <Button variant="secondary" size="lg">
-        Começar Agora
-      </Button>
+      <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+        <ButtonLink
+          href="/login"
+          size="lg"
+        >
+          Começar agora
+        </ButtonLink>
+
+        <a
+          href="#features"
+          className="inline-flex items-center justify-center rounded-xl border border-blue-600 px-8 py-4 text-lg font-medium text-blue-600 transition hover:bg-blue-50"
+        >
+          Ver recursos
+        </a>
+      </div>
     </section>
   )
 }

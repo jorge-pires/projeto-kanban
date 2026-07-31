@@ -23,7 +23,7 @@ const sizes = {
 
 export function Button({
   children,
-  variant,
+  variant = "primary",
   size,
   className,
   ...props
