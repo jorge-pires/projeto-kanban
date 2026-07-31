@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ButtonLink } from "@/components/ui/button-link";
 
 export default function LoginPage() {
   return (
@@ -10,12 +10,9 @@ export default function LoginPage() {
           A página de autenticação será desenvolvida nas próximas etapas.
         </p>
 
-        <Link
-          href="/"
-          className="mt-6 inline-block text-blue-600 transition hover:underline"
-        >
+        <ButtonLink href="/" variant="ghost" size="sm" className="mt-6">
           Voltar para a página inicial
-        </Link>
+        </ButtonLink>
       </section>
     </main>
   );

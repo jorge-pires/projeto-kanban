@@ -1,6 +1,7 @@
 export type ButtonVariant =
   | "primary"
   | "secondary"
+  | "ghost"
 
 export type ButtonSize =
   | "sm"
@@ -10,8 +11,12 @@ export type ButtonSize =
 export const buttonVariants = {
   primary:
     "bg-blue-600 text-white hover:bg-blue-700",
+
   secondary:
     "border border-blue-600 text-blue-600 hover:bg-blue-50",
+
+  ghost:
+    "text-blue-600 hover:bg-blue-50",
 }
 
 export const buttonSizes = {
