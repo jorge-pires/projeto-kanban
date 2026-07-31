@@ -1,33 +1,21 @@
 import Link from "next/link"
 import type { ComponentProps, ReactNode } from "react"
 
-type ButtonLinkVariant =
-  | "primary"
-  | "secondary"
+import {
+  buttonSizes,
+  buttonVariants,
+} from "@/components/ui/button-styles"
 
-type ButtonLinkSize =
-  | "sm"
-  | "md"
-  | "lg"
+import type {
+  ButtonSize,
+  ButtonVariant,
+} from "@/components/ui/button-styles"
 
 interface ButtonLinkProps
   extends ComponentProps<typeof Link> {
   children: ReactNode
-  variant?: ButtonLinkVariant
-  size?: ButtonLinkSize
-}
-
-const variants = {
-  primary:
-    "bg-blue-600 text-white hover:bg-blue-700",
-  secondary:
-    "border border-blue-600 text-blue-600 hover:bg-blue-50",
-}
-
-const sizes = {
-  sm: "px-3 py-2 text-sm",
-  md: "px-5 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
+  variant?: ButtonVariant
+  size?: ButtonSize
 }
 
 export function ButtonLink({
@@ -46,8 +34,8 @@ export function ButtonLink({
         rounded-xl
         font-medium
         transition
-        ${variants[variant]}
-        ${sizes[size]}
+        ${buttonVariants[variant]}
+        ${buttonSizes[size]}
         ${className ?? ""}
       `}
       {...props}
