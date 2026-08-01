@@ -1,15 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import type { FormEvent } from "react";
 
 import { Button } from "@/components/ui/Button";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!email || !password) {
+      setError("Preencha todos os campos.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
+
+    setError("");
 
     console.log({
       email,
@@ -25,6 +39,7 @@ export function LoginForm() {
         </label>
 
         <input
+          required
           id="email"
           name="email"
           type="email"
@@ -41,6 +56,8 @@ export function LoginForm() {
         </label>
 
         <input
+          required
+          minLength={6}
           id="password"
           name="password"
           type="password"
@@ -50,6 +67,15 @@ export function LoginForm() {
           className="rounded-lg border px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
         />
       </div>
+
+      {error && (
+        <p
+          role="alert"
+          className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
+          {error}
+        </p>
+      )}
 
       <Button type="submit" variant="primary" size="md" className="w-full">
         Entrar
