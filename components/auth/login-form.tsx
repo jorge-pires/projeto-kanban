@@ -8,8 +8,17 @@ export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    console.log({
+      email,
+      password,
+    });
+  }
+
   return (
-    <form className="mt-8 flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-5">
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-sm font-medium">
           E-mail
