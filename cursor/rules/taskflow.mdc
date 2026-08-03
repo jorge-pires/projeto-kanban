@@ -1,0 +1,67 @@
+---
+description: Core development rules for the TaskFlow application
+alwaysApply: true
+---
+
+# TaskFlow development rules
+
+## Stack
+
+- Use Next.js with the App Router.
+- Use React, TypeScript and Tailwind CSS.
+- Do not introduce a new library unless the user explicitly approves it.
+- Use the existing project dependencies before suggesting new ones.
+
+## TypeScript
+
+- Do not use `any`.
+- Prefer explicit types for component props and domain data.
+- Reuse existing shared types when appropriate.
+- Do not suppress TypeScript errors without explaining the reason.
+
+## Next.js and React
+
+- Keep components as Server Components by default.
+- Add `"use client"` only when hooks, browser APIs or user interaction require it.
+- Use `next/link` for internal route navigation.
+- Use semantic HTML elements.
+- Do not nest interactive elements such as a link inside a button.
+
+## Components
+
+- Reuse existing components before creating new ones.
+- Keep each component focused on one clear responsibility.
+- Preserve existing public component APIs unless the task requires changing them.
+- When changing a shared component, inspect and update all affected usages.
+
+## Styling
+
+- Use Tailwind CSS.
+- Follow a mobile-first approach.
+- Preserve the current TaskFlow visual language.
+- Prefer standard Tailwind values over arbitrary values.
+- Maintain visible keyboard focus styles.
+
+## Language
+
+- Use English for code, variables, types, file names and commit messages.
+- Use Portuguese for text visible in the user interface.
+
+## Scope and safety
+
+- Change only files related to the requested task.
+- Do not edit generated files.
+- Do not expose secrets, passwords or environment variables.
+- Do not run destructive commands.
+- Do not commit code automatically.
+- Explain any unresolved error instead of hiding it.
+
+## Verification
+
+After an implementation:
+
+1. Review every changed file.
+2. Check TypeScript errors.
+3. Run lint when available.
+4. Test the affected behavior.
+5. Report unresolved warnings or errors.
