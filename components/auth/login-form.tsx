@@ -39,6 +39,12 @@ export function LoginForm() {
     )
   }
 
+  function togglePasswordVisibility() {
+    setIsPasswordVisible(
+      (previousState) => !previousState
+    )
+  }
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -83,7 +89,11 @@ export function LoginForm() {
           <input
             id="password"
             name="password"
-            type={isPasswordVisible ? "text" : "password"}
+            type={
+              isPasswordVisible
+                ? "text"
+                : "password"
+            }
             value={password}
             onChange={(event) =>
               setPassword(event.target.value)
@@ -95,22 +105,22 @@ export function LoginForm() {
             }
             required
             minLength={6}
-            className="w-full rounded-lg border px-4 py-3 pr-20 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-lg border px-4 py-3 pr-24 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
           />
 
           <button
             type="button"
-            onClick={() =>
-              setIsPasswordVisible((visible) => !visible)
-            }
+            onClick={togglePasswordVisibility}
             aria-label={
               isPasswordVisible
                 ? "Ocultar senha"
                 : "Mostrar senha"
             }
-            className="absolute inset-y-0 right-0 px-4 text-sm font-medium text-blue-600 transition hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-100"
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md px-2 py-1 text-sm font-medium text-blue-600 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-600"
           >
-            {isPasswordVisible ? "Ocultar" : "Mostrar"}
+            {isPasswordVisible
+              ? "Ocultar"
+              : "Mostrar"}
           </button>
         </div>
       </div>
@@ -139,7 +149,7 @@ export function LoginForm() {
         variant="primary"
         size="md"
         className="w-full"
-      > 
+      >
         Entrar
       </Button>
     </form>
