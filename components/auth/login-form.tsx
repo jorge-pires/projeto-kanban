@@ -11,6 +11,8 @@ export function LoginForm() {
   const [error, setError] = useState("")
   const [successMessage, setSuccessMessage] =
     useState("")
+  const [isPasswordVisible, setIsPasswordVisible] =
+    useState(false)
 
   function handleSubmit(
     event: FormEvent<HTMLFormElement>
@@ -77,23 +79,40 @@ export function LoginForm() {
           Senha
         </label>
 
-        <input
-          id="password"
-          name="password"
-          type="password"
-          value={password}
-          onChange={(event) =>
-            setPassword(event.target.value)
-          }
-          placeholder="Digite sua senha"
-          autoComplete="current-password"
-          aria-describedby={
-            error ? "login-error" : undefined
-          }
-          required
-          minLength={6}
-          className="rounded-lg border px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-        />
+        <div className="relative">
+          <input
+            id="password"
+            name="password"
+            type={isPasswordVisible ? "text" : "password"}
+            value={password}
+            onChange={(event) =>
+              setPassword(event.target.value)
+            }
+            placeholder="Digite sua senha"
+            autoComplete="current-password"
+            aria-describedby={
+              error ? "login-error" : undefined
+            }
+            required
+            minLength={6}
+            className="w-full rounded-lg border px-4 py-3 pr-20 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          />
+
+          <button
+            type="button"
+            onClick={() =>
+              setIsPasswordVisible((visible) => !visible)
+            }
+            aria-label={
+              isPasswordVisible
+                ? "Ocultar senha"
+                : "Mostrar senha"
+            }
+            className="absolute inset-y-0 right-0 px-4 text-sm font-medium text-blue-600 transition hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-100"
+          >
+            {isPasswordVisible ? "Ocultar" : "Mostrar"}
+          </button>
+        </div>
       </div>
 
       {error && (
@@ -120,7 +139,7 @@ export function LoginForm() {
         variant="primary"
         size="md"
         className="w-full"
-      >
+      > 
         Entrar
       </Button>
     </form>
