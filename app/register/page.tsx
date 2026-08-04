@@ -1,31 +1,31 @@
-import { LoginForm } from "@/components/auth/login-form"
+import { RegisterForm } from "@/components/auth/register-form"
 import { ButtonLink } from "@/components/ui/button-link"
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50 px-6 py-12">
       <section className="w-full max-w-md rounded-2xl border bg-white p-8 shadow-sm">
         <h1 className="text-3xl font-bold">
-          Entrar
+          Criar conta
         </h1>
 
         <p className="mt-3 text-gray-600">
-          Entre na sua conta para acessar suas tarefas.
+          Cadastre-se para começar a organizar suas tarefas.
         </p>
 
-        <LoginForm />
+        <RegisterForm />
 
         <p className="mt-6 text-center text-sm text-gray-600">
-          Ainda não possui uma conta?
+          Já possui uma conta?
         </p>
 
         <ButtonLink
-          href="/register"
+          href="/login"
           variant="ghost"
           size="sm"
           className="mt-2 w-full"
         >
-          Criar conta
+          Entrar
         </ButtonLink>
 
         <ButtonLink
