@@ -1,8 +1,13 @@
+import { KanbanBoard } from "@/components/kanban/kanban-board"
+import { tasks } from "@/data/tasks"
+
 export default function TasksPage() {
   return (
     <div className="mx-auto max-w-7xl">
       <section>
-        <p className="text-sm font-medium text-blue-600">Organização</p>
+        <p className="text-sm font-medium text-blue-600">
+          Organização
+        </p>
 
         <div className="mt-2 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -11,8 +16,8 @@ export default function TasksPage() {
             </h1>
 
             <p className="mt-3 max-w-2xl text-gray-600">
-              Organize suas atividades em um fluxo Kanban e acompanhe o
-              progresso de cada tarefa.
+              Organize suas atividades em um fluxo Kanban e
+              acompanhe o progresso de cada tarefa.
             </p>
           </div>
 
@@ -26,30 +31,11 @@ export default function TasksPage() {
       </section>
 
       <section
-        aria-labelledby="tasks-empty-title"
-        className="mt-8 rounded-2xl border bg-white p-6 shadow-sm"
+        aria-label="Quadro Kanban de tarefas"
+        className="mt-8"
       >
-        <div className="flex min-h-80 flex-col items-center justify-center text-center">
-          <div
-            aria-hidden="true"
-            className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-xl font-bold text-blue-700"
-          >
-            T
-          </div>
-
-          <h2
-            id="tasks-empty-title"
-            className="mt-5 text-xl font-semibold text-gray-950"
-          >
-            Nenhuma tarefa criada
-          </h2>
-
-          <p className="mt-2 max-w-md text-sm leading-6 text-gray-500">
-            Suas tarefas aparecerão aqui em colunas como A Fazer, Em Andamento e
-            Concluído.
-          </p>
-        </div>
+        <KanbanBoard tasks={tasks} />
       </section>
     </div>
-  );
+  )
 }
