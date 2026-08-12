@@ -1,20 +1,21 @@
-import { TaskCard } from "@/components/kanban/task-card"
+import { TaskCard } from "@/components/kanban/task-card";
 
-import type {
-  Task,
-  TaskStatus,
-} from "@/types/task"
+import type { Task, TaskStatus } from "@/types/task";
 
 interface KanbanColumnProps {
-  title: string
-  status: TaskStatus
-  tasks: Task[]
+  title: string;
+  status: TaskStatus;
+  tasks: Task[];
+  onEditTask: (task: Task) => void;
+  onDeleteTask: (taskId: string) => void;
 }
 
 export function KanbanColumn({
   title,
   status,
   tasks,
+  onEditTask,
+  onDeleteTask,
 }: KanbanColumnProps) {
   return (
     <section
@@ -22,10 +23,7 @@ export function KanbanColumn({
       className="rounded-2xl bg-gray-100 p-4"
     >
       <div className="flex items-center justify-between gap-4">
-        <h2
-          id={`column-${status}`}
-          className="font-semibold text-gray-950"
-        >
+        <h2 id={`column-${status}`} className="font-semibold text-gray-950">
           {title}
         </h2>
 
@@ -43,16 +41,16 @@ export function KanbanColumn({
             <TaskCard
               key={task.id}
               task={task}
+              onEdit={onEditTask}
+              onDelete={onDeleteTask}
             />
           ))
         ) : (
           <div className="rounded-xl border border-dashed border-gray-300 px-4 py-8 text-center">
-            <p className="text-sm text-gray-500">
-              Nenhuma tarefa nesta etapa.
-            </p>
+            <p className="text-sm text-gray-500">Nenhuma tarefa nesta etapa.</p>
           </div>
         )}
       </div>
     </section>
-  )
+  );
 }

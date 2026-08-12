@@ -8,41 +8,34 @@ import { Button } from "@/components/ui/Button";
 import type { Task, TaskPriority } from "@/types/task";
 
 interface CreateTaskDialogProps {
-  isOpen: boolean;
+  task: Task | null;
   onClose: () => void;
-  onCreateTask: (task: Task) => void;
+  onSubmitTask: (task: Task) => void;
 }
 
 export function CreateTaskDialog({
-  isOpen,
+  task,
   onClose,
-  onCreateTask,
+  onSubmitTask,
 }: CreateTaskDialogProps) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState<TaskPriority>("medium");
-  const [dueDate, setDueDate] = useState("");
+  const [title, setTitle] = useState(task?.title ?? "");
+
+  const [description, setDescription] = useState(task?.description ?? "");
+
+  const [priority, setPriority] = useState<TaskPriority>(
+    task?.priority ?? "medium",
+  );
+
+  const [dueDate, setDueDate] = useState(task?.dueDate ?? "");
+
   const [error, setError] = useState("");
 
-  if (!isOpen) {
-    return null;
-  }
-
-  function resetForm() {
-    setTitle("");
-    setDescription("");
-    setPriority("medium");
-    setDueDate("");
-    setError("");
-  }
-
-  function handleClose() {
-    resetForm();
-    onClose();
-  }
+  const isEditing = Boolean(task);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    setError("");
 
     const normalizedTitle = title.trim();
     const normalizedDescription = description.trim();
@@ -52,17 +45,16 @@ export function CreateTaskDialog({
       return;
     }
 
-    const newTask: Task = {
-      id: crypto.randomUUID(),
+    const taskToSubmit: Task = {
+      id: task?.id ?? crypto.randomUUID(),
       title: normalizedTitle,
       description: normalizedDescription,
-      status: "todo",
+      status: task?.status ?? "todo",
       priority,
       dueDate,
     };
 
-    onCreateTask(newTask);
-    resetForm();
+    onSubmitTask(taskToSubmit);
     onClose();
   }
 
@@ -70,34 +62,36 @@ export function CreateTaskDialog({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <button
         type="button"
-        aria-label="Fechar formulário de nova tarefa"
-        onClick={handleClose}
+        aria-label="Fechar formulário de tarefa"
+        onClick={onClose}
         className="absolute inset-0 bg-slate-950/60"
       />
 
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="create-task-title"
+        aria-labelledby="task-dialog-title"
         className="relative z-10 w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2
-              id="create-task-title"
+              id="task-dialog-title"
               className="text-xl font-semibold text-gray-950"
             >
-              Nova tarefa
+              {isEditing ? "Editar tarefa" : "Nova tarefa"}
             </h2>
 
             <p className="mt-1 text-sm text-gray-500">
-              Adicione uma atividade ao seu quadro Kanban.
+              {isEditing
+                ? "Atualize as informações da tarefa selecionada."
+                : "Adicione uma atividade ao seu quadro Kanban."}
             </p>
           </div>
 
           <button
             type="button"
-            onClick={handleClose}
+            onClick={onClose}
             aria-label="Fechar"
             className="rounded-lg px-3 py-2 text-sm text-gray-500 transition hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
           >
@@ -211,13 +205,13 @@ export function CreateTaskDialog({
               type="button"
               variant="secondary"
               size="md"
-              onClick={handleClose}
+              onClick={onClose}
             >
               Cancelar
             </Button>
 
             <Button type="submit" variant="primary" size="md">
-              Criar tarefa
+              {isEditing ? "Salvar alterações" : "Criar tarefa"}
             </Button>
           </div>
         </form>
