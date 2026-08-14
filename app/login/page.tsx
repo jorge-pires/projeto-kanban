@@ -8,7 +8,16 @@ export const metadata: Metadata = {
   description: "Entre na sua conta do TaskFlow.",
 };
 
-export default function LoginPage() {
+interface LoginPageProps {
+  searchParams: Promise<{
+    registered?: string;
+  }>;
+}
+
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const { registered } = await searchParams;
+  const accountWasCreated = registered === "true";
+
   return (
     <main
       id="main-content"
@@ -26,6 +35,15 @@ export default function LoginPage() {
         <p className="mt-3 text-slate-600">
           Entre na sua conta para acessar suas tarefas.
         </p>
+
+        {accountWasCreated && (
+          <p
+            role="status"
+            className="mt-6 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-800"
+          >
+            Conta criada com sucesso. Agora você pode entrar.
+          </p>
+        )}
 
         <LoginForm />
 
