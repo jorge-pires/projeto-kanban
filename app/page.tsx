@@ -1,19 +1,21 @@
-import { Navbar } from "@/components/landing/navbar"
-import { Hero } from "@/components/landing/hero"
-import { Features } from "@/components/landing/features"
-import { CTA } from "@/components/landing/cta"
-import { Footer } from "@/components/landing/footer"
-import { Counter } from "@/components/ui/Counter"
+import { CTA } from "@/components/landing/cta";
+import { Features } from "@/components/landing/features";
+import { Footer } from "@/components/landing/footer";
+import { Hero } from "@/components/landing/hero";
+import { Navbar } from "@/components/landing/navbar";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Features />
-      <CTA />
-      <Counter />
+
+      <main>
+        <Hero />
+        <Features />
+        <CTA />
+      </main>
+
       <Footer />
     </>
-  )
+  );
 }
