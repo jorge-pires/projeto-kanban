@@ -55,7 +55,16 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
       lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-50 -translate-y-24 rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
+        >
+          Pular para o conteúdo
+        </a>
+
+        {children}
+      </body>
     </html>
   );
 }

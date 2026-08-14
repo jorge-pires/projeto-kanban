@@ -9,7 +9,7 @@ export default function HomePage() {
     <>
       <Navbar />
 
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <Features />
         <CTA />
