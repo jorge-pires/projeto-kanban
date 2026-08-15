@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 
+import { auth } from "@/auth";
 import { LoginForm } from "@/components/auth/login-form";
 import { ButtonLink } from "@/components/ui/button-link";
 
@@ -15,6 +17,12 @@ interface LoginPageProps {
 }
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const session = await auth();
+
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+
   const { registered } = await searchParams;
   const accountWasCreated = registered === "true";
 
