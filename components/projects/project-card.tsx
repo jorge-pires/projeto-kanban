@@ -84,13 +84,23 @@ export function ProjectCard({
           Atualizado em {dateFormatter.format(updatedAt)}
         </p>
 
-        <Link
-          href={`/projects/${id}`}
-          aria-label={`Abrir o projeto ${name}`}
-          className="mt-5 inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-        >
-          Abrir projeto
-        </Link>
+        <div className="mt-5 grid grid-cols-2 gap-3">
+          <Link
+            href={`/projects/${id}`}
+            aria-label={`Abrir o projeto ${name}`}
+            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+          >
+            Abrir
+          </Link>
+
+          <Link
+            href={`/projects/${id}/edit`}
+            aria-label={`Editar o projeto ${name}`}
+            className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+          >
+            Editar
+          </Link>
+        </div>
       </div>
     </article>
   );
