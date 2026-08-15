@@ -1,17 +1,26 @@
-import type { ReactNode } from "react"
+import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
 
-import { DashboardShell } from "@/components/dashboard/dashboard-shell"
+import { auth } from "@/auth";
+import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 
 interface DashboardLayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
-  return (
-    <DashboardShell>
-      {children}
-    </DashboardShell>
-  )
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
+  const user = {
+    name: session.user.name ?? "Usuário",
+    email: session.user.email ?? "Conta TaskFlow",
+  };
+
+  return <DashboardShell user={user}>{children}</DashboardShell>;
 }
