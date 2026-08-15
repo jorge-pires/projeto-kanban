@@ -3,51 +3,13 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/auth";
 import { CreateProjectForm } from "@/components/projects/create-project-form";
+import { ProjectCard } from "@/components/projects/project-card";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Projetos",
   description: "Crie e organize seus projetos no TaskFlow.",
 };
-
-const projectColorStyles = {
-  blue: {
-    indicator: "bg-blue-600",
-    badge: "bg-blue-50 text-blue-700",
-  },
-  emerald: {
-    indicator: "bg-emerald-600",
-    badge: "bg-emerald-50 text-emerald-700",
-  },
-  violet: {
-    indicator: "bg-violet-600",
-    badge: "bg-violet-50 text-violet-700",
-  },
-  amber: {
-    indicator: "bg-amber-500",
-    badge: "bg-amber-50 text-amber-800",
-  },
-  rose: {
-    indicator: "bg-rose-600",
-    badge: "bg-rose-50 text-rose-700",
-  },
-} as const;
-
-type ProjectColor = keyof typeof projectColorStyles;
-
-function getProjectColorStyle(color: string) {
-  if (color in projectColorStyles) {
-    return projectColorStyles[color as ProjectColor];
-  }
-
-  return projectColorStyles.blue;
-}
-
-const dateFormatter = new Intl.DateTimeFormat("pt-BR", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-});
 
 export default async function ProjectsPage() {
   const session = await auth();
@@ -136,42 +98,17 @@ export default async function ProjectsPage() {
           </div>
         ) : (
           <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {projects.map((project) => {
-              const colorStyle = getProjectColorStyle(project.color);
-
-              return (
-                <article
-                  key={project.id}
-                  className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <div
-                    aria-hidden="true"
-                    className={`absolute inset-x-0 top-0 h-1 ${colorStyle.indicator}`}
-                  />
-
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="text-lg font-semibold text-slate-950">
-                      {project.name}
-                    </h3>
-
-                    <span
-                      className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium ${colorStyle.badge}`}
-                    >
-                      {project._count.tasks}{" "}
-                      {project._count.tasks === 1 ? "tarefa" : "tarefas"}
-                    </span>
-                  </div>
-
-                  <p className="mt-3 min-h-12 text-sm leading-6 text-slate-600">
-                    {project.description ?? "Projeto sem descrição."}
-                  </p>
-
-                  <p className="mt-5 border-t border-slate-100 pt-4 text-xs text-slate-500">
-                    Atualizado em {dateFormatter.format(project.updatedAt)}
-                  </p>
-                </article>
-              );
-            })}
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                id={project.id}
+                name={project.name}
+                description={project.description}
+                color={project.color}
+                taskCount={project._count.tasks}
+                updatedAt={project.updatedAt}
+              />
+            ))}
           </div>
         )}
       </section>
