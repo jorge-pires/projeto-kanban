@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 import { auth } from "@/auth";
+import { CreateTaskForm } from "@/components/tasks/create-task-form";
+import { ProjectTaskColumn } from "@/components/tasks/project-task-column";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -49,9 +51,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       ownerId: session.user.id,
     },
     include: {
-      _count: {
-        select: {
-          tasks: true,
+      tasks: {
+        orderBy: {
+          position: "asc",
         },
       },
     },
@@ -60,6 +62,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) {
     notFound();
   }
+
+  const todoTasks = project.tasks.filter((task) => task.status === "todo");
+
+  const inProgressTasks = project.tasks.filter(
+    (task) => task.status === "in-progress",
+  );
+
+  const doneTasks = project.tasks.filter((task) => task.status === "done");
 
   const colorClass = getProjectColor(project.color);
 
@@ -86,7 +96,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <p className="text-sm font-medium text-blue-700">Projeto</p>
             </div>
 
-            <h1 className="mt-3 wrap-break-words text-3xl font-bold tracking-tight text-slate-950">
+            <h1 className="mt-3 wrap-break-word text-3xl font-bold tracking-tight text-slate-950">
               {project.name}
             </h1>
 
@@ -96,77 +106,67 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </p>
           </div>
 
-          <div className="shrink-0 rounded-xl bg-slate-100 px-4 py-3 text-center">
-            <p className="text-2xl font-bold text-slate-950">
-              {project._count.tasks}
-            </p>
+          <div className="flex shrink-0 gap-3">
+            <Link
+              href={`/projects/${project.id}/edit`}
+              className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            >
+              Editar projeto
+            </Link>
 
-            <p className="text-xs text-slate-600">
-              {project._count.tasks === 1 ? "tarefa" : "tarefas"}
-            </p>
+            <a
+              href="#new-task"
+              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            >
+              Nova tarefa
+            </a>
           </div>
         </div>
       </header>
 
+      <CreateTaskForm projectId={project.id} />
+
       <section aria-labelledby="project-board-title" className="mt-8">
-        <div>
-          <p className="text-sm font-medium text-blue-700">Organização</p>
+        <p className="text-sm font-medium text-blue-700">Organização</p>
 
-          <h2
-            id="project-board-title"
-            className="mt-2 text-2xl font-semibold text-slate-950"
-          >
-            Quadro do projeto
-          </h2>
+        <div className="mt-2 flex items-end justify-between gap-4">
+          <div>
+            <h2
+              id="project-board-title"
+              className="text-2xl font-semibold text-slate-950"
+            >
+              Quadro do projeto
+            </h2>
 
-          <p className="mt-2 text-sm text-slate-600">
-            As tarefas deste projeto serão organizadas por status neste quadro
-            Kanban.
+            <p className="mt-2 text-sm text-slate-600">
+              Acompanhe as tarefas de acordo com seu estágio.
+            </p>
+          </div>
+
+          <p className="text-sm text-slate-500">
+            {project.tasks.length}{" "}
+            {project.tasks.length === 1 ? "tarefa" : "tarefas"}
           </p>
         </div>
 
-        <div className="mt-5 grid gap-4 lg:grid-cols-3">
-          <article className="rounded-2xl border border-slate-200 bg-slate-100 p-4">
-            <div className="flex items-center justify-between gap-3">
-              <h3 className="font-semibold text-slate-900">A fazer</h3>
+        <div className="mt-5 grid items-start gap-4 lg:grid-cols-3">
+          <ProjectTaskColumn
+            title="A fazer"
+            tasks={todoTasks}
+            emptyMessage="Nenhuma tarefa a fazer."
+          />
 
-              <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600">
-                0
-              </span>
-            </div>
+          <ProjectTaskColumn
+            title="Em andamento"
+            tasks={inProgressTasks}
+            emptyMessage="Nenhuma tarefa em andamento."
+          />
 
-            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-white px-4 py-10 text-center">
-              <p className="text-sm text-slate-500">Nenhuma tarefa</p>
-            </div>
-          </article>
-
-          <article className="rounded-2xl border border-slate-200 bg-slate-100 p-4">
-            <div className="flex items-center justify-between gap-3">
-              <h3 className="font-semibold text-slate-900">Em andamento</h3>
-
-              <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600">
-                0
-              </span>
-            </div>
-
-            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-white px-4 py-10 text-center">
-              <p className="text-sm text-slate-500">Nenhuma tarefa</p>
-            </div>
-          </article>
-
-          <article className="rounded-2xl border border-slate-200 bg-slate-100 p-4">
-            <div className="flex items-center justify-between gap-3">
-              <h3 className="font-semibold text-slate-900">Concluído</h3>
-
-              <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600">
-                0
-              </span>
-            </div>
-
-            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-white px-4 py-10 text-center">
-              <p className="text-sm text-slate-500">Nenhuma tarefa</p>
-            </div>
-          </article>
+          <ProjectTaskColumn
+            title="Concluído"
+            tasks={doneTasks}
+            emptyMessage="Nenhuma tarefa concluída."
+          />
         </div>
       </section>
     </div>
