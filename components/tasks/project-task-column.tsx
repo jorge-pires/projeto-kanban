@@ -2,6 +2,7 @@ import { ProjectTaskCard } from "@/components/tasks/project-task-card";
 
 interface ColumnTask {
   id: string;
+  projectId: string;
   title: string;
   description: string;
   priority: string;
@@ -24,10 +25,7 @@ export function ProjectTaskColumn({
       <div className="flex items-center justify-between gap-3">
         <h3 className="font-semibold text-slate-900">{title}</h3>
 
-        <span
-          aria-label={`${tasks.length} tarefas`}
-          className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600"
-        >
+        <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600">
           {tasks.length}
         </span>
       </div>
@@ -41,6 +39,8 @@ export function ProjectTaskColumn({
           {tasks.map((task) => (
             <ProjectTaskCard
               key={task.id}
+              id={task.id}
+              projectId={task.projectId}
               title={task.title}
               description={task.description}
               priority={task.priority}

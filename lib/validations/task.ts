@@ -2,6 +2,8 @@ import { z } from "zod";
 
 export const taskPriorities = ["low", "medium", "high"] as const;
 
+export const taskStatuses = ["todo", "in-progress", "done"] as const;
+
 const dueDateSchema = z
   .string()
   .trim()
@@ -23,7 +25,7 @@ const dueDateSchema = z
   )
   .transform((value) => (value ? new Date(`${value}T00:00:00.000Z`) : null));
 
-export const createTaskSchema = z.object({
+const taskFieldsSchema = z.object({
   title: z
     .string()
     .trim()
@@ -42,4 +44,14 @@ export const createTaskSchema = z.object({
   dueDate: dueDateSchema,
 });
 
+export const createTaskSchema = taskFieldsSchema;
+
+export const updateTaskSchema = taskFieldsSchema.extend({
+  status: z.enum(taskStatuses, {
+    message: "Selecione um status válido.",
+  }),
+});
+
 export type CreateTaskInput = z.infer<typeof createTaskSchema>;
+
+export type UpdateTaskInput = z.infer<typeof updateTaskSchema>;

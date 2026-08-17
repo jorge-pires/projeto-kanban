@@ -1,4 +1,8 @@
+import Link from "next/link";
+
 interface ProjectTaskCardProps {
+  id: string;
+  projectId: string;
   title: string;
   description: string;
   priority: string;
@@ -38,6 +42,8 @@ function getPriorityStyle(priority: string) {
 }
 
 export function ProjectTaskCard({
+  id,
+  projectId,
   title,
   description,
   priority,
@@ -70,6 +76,14 @@ export function ProjectTaskCard({
           ? `Prazo: ${dateFormatter.format(dueDate)}`
           : "Sem prazo definido"}
       </p>
+
+      <Link
+        href={`/projects/${projectId}/tasks/${id}/edit`}
+        aria-label={`Editar a tarefa ${title}`}
+        className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+      >
+        Editar tarefa
+      </Link>
     </article>
   );
 }
