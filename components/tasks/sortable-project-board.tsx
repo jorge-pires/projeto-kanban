@@ -13,13 +13,18 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { useState, useTransition } from "react";
+import { useDeferredValue, useMemo, useState, useTransition } from "react";
 
 import {
   saveTaskOrder,
   type TaskOrderUpdate,
 } from "@/app/(dashboard)/projects/[projectId]/reorder-task-actions";
 import { SortableTaskColumn } from "@/components/tasks/sortable-task-column";
+import {
+  TaskBoardToolbar,
+  type PriorityFilter,
+  type TaskSortOption,
+} from "@/components/tasks/task-board-toolbar";
 import { taskStatuses, type TaskStatus } from "@/lib/validations/task";
 
 export interface BoardTask {
@@ -58,8 +63,22 @@ const columnInformation: Record<
   },
 };
 
+const priorityWeight: Record<string, number> = {
+  high: 3,
+  medium: 2,
+  low: 1,
+};
+
 function isTaskStatus(value: string): value is TaskStatus {
   return taskStatuses.some((status) => status === value);
+}
+
+function normalizeText(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .trim();
 }
 
 function getColumnTasks(tasks: BoardTask[], status: TaskStatus) {
@@ -82,14 +101,79 @@ function createOrderUpdates(tasks: BoardTask[]): TaskOrderUpdate[] {
   });
 }
 
+function sortTasks(tasks: BoardTask[], sort: TaskSortOption) {
+  if (sort === "manual") {
+    return tasks;
+  }
+
+  return [...tasks].sort((firstTask, secondTask) => {
+    if (sort === "priority") {
+      const firstWeight = priorityWeight[firstTask.priority] ?? 0;
+
+      const secondWeight = priorityWeight[secondTask.priority] ?? 0;
+
+      return secondWeight - firstWeight;
+    }
+
+    if (!firstTask.dueDate && !secondTask.dueDate) {
+      return 0;
+    }
+
+    if (!firstTask.dueDate) {
+      return 1;
+    }
+
+    if (!secondTask.dueDate) {
+      return -1;
+    }
+
+    return (
+      new Date(firstTask.dueDate).getTime() -
+      new Date(secondTask.dueDate).getTime()
+    );
+  });
+}
+
 export function SortableProjectBoard({
   projectId,
   initialTasks,
 }: SortableProjectBoardProps) {
   const [tasks, setTasks] = useState(initialTasks);
+  const [search, setSearch] = useState("");
+  const [priority, setPriority] = useState<PriorityFilter>("all");
+  const [sort, setSort] = useState<TaskSortOption>("manual");
   const [activeTaskId, setActiveTaskId] = useState<string | null>(null);
   const [message, setMessage] = useState("");
   const [isSaving, startSaving] = useTransition();
+
+  const deferredSearch = useDeferredValue(search);
+
+  const hasCustomView =
+    deferredSearch.trim() !== "" || priority !== "all" || sort !== "manual";
+
+  const visibleTasks = useMemo(() => {
+    const normalizedSearch = normalizeText(deferredSearch);
+
+    const filteredTasks = tasks.filter((task) => {
+      const matchesPriority = priority === "all" || task.priority === priority;
+
+      if (!matchesPriority) {
+        return false;
+      }
+
+      if (!normalizedSearch) {
+        return true;
+      }
+
+      const searchableContent = normalizeText(
+        `${task.title} ${task.description ?? ""}`,
+      );
+
+      return searchableContent.includes(normalizedSearch);
+    });
+
+    return sortTasks(filteredTasks, sort);
+  }, [deferredSearch, priority, sort, tasks]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -112,7 +196,18 @@ export function SortableProjectBoard({
     ? tasks.find((task) => task.id === activeTaskId)
     : null;
 
+  function clearFilters() {
+    setSearch("");
+    setPriority("all");
+    setSort("manual");
+    setMessage("Filtros removidos.");
+  }
+
   function handleDragStart(event: DragStartEvent) {
+    if (hasCustomView || isSaving) {
+      return;
+    }
+
     setMessage("");
     setActiveTaskId(String(event.active.id));
   }
@@ -124,6 +219,13 @@ export function SortableProjectBoard({
 
   function handleDragEnd(event: DragEndEvent) {
     setActiveTaskId(null);
+
+    if (hasCustomView || isSaving) {
+      setMessage(
+        "Limpe os filtros e use a ordem manual para arrastar tarefas.",
+      );
+      return;
+    }
 
     const { active, over } = event;
 
@@ -220,6 +322,29 @@ export function SortableProjectBoard({
 
   return (
     <div>
+      <TaskBoardToolbar
+        search={search}
+        priority={priority}
+        sort={sort}
+        resultCount={visibleTasks.length}
+        totalCount={tasks.length}
+        onSearchChange={setSearch}
+        onPriorityChange={setPriority}
+        onSortChange={setSort}
+        onClear={clearFilters}
+      />
+
+      {hasCustomView ? (
+        <div
+          role="status"
+          className="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200"
+        >
+          O arraste está desativado durante buscas, filtros ou ordenações
+          temporárias. Selecione “Ordem manual” e limpe os filtros para
+          reorganizar as tarefas.
+        </div>
+      ) : null}
+
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
@@ -233,9 +358,13 @@ export function SortableProjectBoard({
               key={status}
               title={columnInformation[status].title}
               status={status}
-              tasks={getColumnTasks(tasks, status)}
-              emptyMessage={columnInformation[status].emptyMessage}
-              disabled={isSaving}
+              tasks={getColumnTasks(visibleTasks, status)}
+              emptyMessage={
+                hasCustomView
+                  ? "Nenhuma tarefa encontrada com estes filtros."
+                  : columnInformation[status].emptyMessage
+              }
+              disabled={isSaving || hasCustomView}
             />
           ))}
         </div>
