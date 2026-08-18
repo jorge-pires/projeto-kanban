@@ -6,6 +6,7 @@ interface ColumnTask {
   title: string;
   description: string;
   priority: string;
+  status: string;
   dueDate: Date | null;
 }
 
@@ -25,7 +26,10 @@ export function ProjectTaskColumn({
       <div className="flex items-center justify-between gap-3">
         <h3 className="font-semibold text-slate-900">{title}</h3>
 
-        <span className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600">
+        <span
+          aria-label={`${tasks.length} tarefas`}
+          className="rounded-full bg-white px-2.5 py-1 text-xs font-medium text-slate-600"
+        >
           {tasks.length}
         </span>
       </div>
@@ -44,6 +48,7 @@ export function ProjectTaskColumn({
               title={task.title}
               description={task.description}
               priority={task.priority}
+              status={task.status}
               dueDate={task.dueDate}
             />
           ))}

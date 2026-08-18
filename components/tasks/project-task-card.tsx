@@ -1,11 +1,14 @@
 import Link from "next/link";
 
+import { MoveTaskControls } from "@/components/tasks/move-task-controls";
+
 interface ProjectTaskCardProps {
   id: string;
   projectId: string;
   title: string;
   description: string;
   priority: string;
+  status: string;
   dueDate: Date | null;
 }
 
@@ -47,6 +50,7 @@ export function ProjectTaskCard({
   title,
   description,
   priority,
+  status,
   dueDate,
 }: ProjectTaskCardProps) {
   const priorityStyle = getPriorityStyle(priority);
@@ -77,10 +81,16 @@ export function ProjectTaskCard({
           : "Sem prazo definido"}
       </p>
 
+      <MoveTaskControls
+        projectId={projectId}
+        taskId={id}
+        currentStatus={status}
+      />
+
       <Link
         href={`/projects/${projectId}/tasks/${id}/edit`}
         aria-label={`Editar a tarefa ${title}`}
-        className="mt-4 inline-flex w-full items-center justify-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+        className="mt-3 inline-flex w-full items-center justify-center rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
       >
         Editar tarefa
       </Link>

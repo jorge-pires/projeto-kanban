@@ -4,6 +4,12 @@ export const taskPriorities = ["low", "medium", "high"] as const;
 
 export const taskStatuses = ["todo", "in-progress", "done"] as const;
 
+export type TaskStatus = (typeof taskStatuses)[number];
+
+export const taskStatusSchema = z.enum(taskStatuses, {
+  message: "Selecione um status válido.",
+});
+
 const dueDateSchema = z
   .string()
   .trim()
@@ -47,9 +53,7 @@ const taskFieldsSchema = z.object({
 export const createTaskSchema = taskFieldsSchema;
 
 export const updateTaskSchema = taskFieldsSchema.extend({
-  status: z.enum(taskStatuses, {
-    message: "Selecione um status válido.",
-  }),
+  status: taskStatusSchema,
 });
 
 export type CreateTaskInput = z.infer<typeof createTaskSchema>;
