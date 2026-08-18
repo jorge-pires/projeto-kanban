@@ -1,39 +1,19 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 import { auth } from "@/auth";
 import { CreateTaskForm } from "@/components/tasks/create-task-form";
-import { ProjectTaskColumn } from "@/components/tasks/project-task-column";
+import {
+  SortableProjectBoard,
+  type BoardTask,
+} from "@/components/tasks/sortable-project-board";
 import { prisma } from "@/lib/prisma";
-
-export const metadata: Metadata = {
-  title: "Detalhes do projeto",
-  description: "Acompanhe as tarefas e o progresso do projeto no TaskFlow.",
-};
+import { taskStatusSchema } from "@/lib/validations/task";
 
 interface ProjectPageProps {
   params: Promise<{
     projectId: string;
   }>;
-}
-
-const projectColorStyles = {
-  blue: "bg-blue-600",
-  emerald: "bg-emerald-600",
-  violet: "bg-violet-600",
-  amber: "bg-amber-500",
-  rose: "bg-rose-600",
-} as const;
-
-type ProjectColor = keyof typeof projectColorStyles;
-
-function getProjectColor(color: string) {
-  if (color in projectColorStyles) {
-    return projectColorStyles[color as ProjectColor];
-  }
-
-  return projectColorStyles.blue;
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -52,9 +32,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     },
     include: {
       tasks: {
-        orderBy: {
-          position: "asc",
-        },
+        orderBy: [
+          {
+            status: "asc",
+          },
+          {
+            position: "asc",
+          },
+          {
+            createdAt: "asc",
+          },
+        ],
       },
     },
   });
@@ -63,112 +51,117 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const todoTasks = project.tasks.filter((task) => task.status === "todo");
+  const tasks: BoardTask[] = project.tasks.flatMap((task) => {
+    const statusResult = taskStatusSchema.safeParse(task.status);
 
-  const inProgressTasks = project.tasks.filter(
-    (task) => task.status === "in-progress",
-  );
+    if (!statusResult.success) {
+      return [];
+    }
 
-  const doneTasks = project.tasks.filter((task) => task.status === "done");
+    return [
+      {
+        id: task.id,
+        projectId: task.projectId,
+        title: task.title,
+        description: task.description,
+        priority: task.priority,
+        status: statusResult.data,
+        dueDate: task.dueDate?.toISOString() ?? null,
+      },
+    ];
+  });
 
-  const colorClass = getProjectColor(project.color);
+  const boardVersion = project.tasks
+    .map((task) => {
+      return [
+        task.id,
+        task.status,
+        task.position,
+        task.title,
+        task.updatedAt.toISOString(),
+      ].join(":");
+    })
+    .join("|");
 
   return (
-    <div className="mx-auto max-w-7xl">
-      <nav aria-label="Navegação estrutural">
-        <Link
-          href="/projects"
-          className="inline-flex rounded-md text-sm font-medium text-blue-700 transition hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-        >
-          ← Voltar para projetos
-        </Link>
-      </nav>
+    <main className="space-y-8">
+      <header className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <Link
+            href="/projects"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            ← Voltar para projetos
+          </Link>
 
-      <header className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-          <div className="min-w-0">
-            <div className="flex items-center gap-3">
-              <span
-                aria-hidden="true"
-                className={`size-4 shrink-0 rounded-full ${colorClass}`}
-              />
+          <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+            Quadro Kanban
+          </p>
 
-              <p className="text-sm font-medium text-blue-700">Projeto</p>
-            </div>
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
+            {project.name}
+          </h1>
 
-            <h1 className="mt-3 wrap-break-word text-3xl font-bold tracking-tight text-slate-950">
-              {project.name}
-            </h1>
-
-            <p className="mt-3 max-w-3xl leading-7 text-slate-600">
-              {project.description ??
-                "Este projeto ainda não possui uma descrição."}
+          {project.description ? (
+            <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
+              {project.description}
             </p>
-          </div>
-
-          <div className="flex shrink-0 gap-3">
-            <Link
-              href={`/projects/${project.id}/edit`}
-              className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-            >
-              Editar projeto
-            </Link>
-
-            <a
-              href="#new-task"
-              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-            >
-              Nova tarefa
-            </a>
-          </div>
+          ) : (
+            <p className="mt-3 text-slate-500 dark:text-slate-400">
+              Este projeto ainda não possui uma descrição.
+            </p>
+          )}
         </div>
+
+        <Link
+          href={`/projects/${project.id}/edit`}
+          className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
+        >
+          Editar projeto
+        </Link>
       </header>
 
-      <CreateTaskForm projectId={project.id} />
+      <section
+        aria-labelledby="new-task-title"
+        className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+      >
+        <div className="mb-5">
+          <h2
+            id="new-task-title"
+            className="text-xl font-semibold text-slate-950 dark:text-white"
+          >
+            Nova tarefa
+          </h2>
 
-      <section aria-labelledby="project-board-title" className="mt-8">
-        <p className="text-sm font-medium text-blue-700">Organização</p>
-
-        <div className="mt-2 flex items-end justify-between gap-4">
-          <div>
-            <h2
-              id="project-board-title"
-              className="text-2xl font-semibold text-slate-950"
-            >
-              Quadro do projeto
-            </h2>
-
-            <p className="mt-2 text-sm text-slate-600">
-              Acompanhe as tarefas de acordo com seu estágio.
-            </p>
-          </div>
-
-          <p className="text-sm text-slate-500">
-            {project.tasks.length}{" "}
-            {project.tasks.length === 1 ? "tarefa" : "tarefas"}
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+            Adicione uma atividade ao quadro Kanban.
           </p>
         </div>
 
-        <div className="mt-5 grid items-start gap-4 lg:grid-cols-3">
-          <ProjectTaskColumn
-            title="A fazer"
-            tasks={todoTasks}
-            emptyMessage="Nenhuma tarefa a fazer."
-          />
-
-          <ProjectTaskColumn
-            title="Em andamento"
-            tasks={inProgressTasks}
-            emptyMessage="Nenhuma tarefa em andamento."
-          />
-
-          <ProjectTaskColumn
-            title="Concluído"
-            tasks={doneTasks}
-            emptyMessage="Nenhuma tarefa concluída."
-          />
-        </div>
+        <CreateTaskForm projectId={project.id} />
       </section>
-    </div>
+
+      <section aria-labelledby="project-board-title">
+        <div className="mb-5">
+          <h2
+            id="project-board-title"
+            className="text-2xl font-bold text-slate-950 dark:text-white"
+          >
+            Tarefas do projeto
+          </h2>
+
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+            Use a alça de cada tarefa para mudar sua ordem ou coluna. Também é
+            possível usar o teclado.
+          </p>
+        </div>
+
+        <SortableProjectBoard
+          key={boardVersion}
+          projectId={project.id}
+          initialTasks={tasks}
+        />
+      </section>
+    </main>
   );
 }
