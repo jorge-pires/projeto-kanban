@@ -2,11 +2,9 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 import { auth } from "@/auth";
+import { ClientSortableProjectBoard } from "@/components/tasks/client-sortable-project-board";
 import { CreateTaskForm } from "@/components/tasks/create-task-form";
-import {
-  SortableProjectBoard,
-  type BoardTask,
-} from "@/components/tasks/sortable-project-board";
+import type { BoardTask } from "@/components/tasks/sortable-project-board";
 import { prisma } from "@/lib/prisma";
 import { taskStatusSchema } from "@/lib/validations/task";
 
@@ -156,7 +154,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </p>
         </div>
 
-        <SortableProjectBoard
+        <ClientSortableProjectBoard
           key={boardVersion}
           projectId={project.id}
           initialTasks={tasks}
