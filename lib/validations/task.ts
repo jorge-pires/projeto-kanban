@@ -10,6 +10,26 @@ export const taskStatusSchema = z.enum(taskStatuses, {
   message: "Selecione um status válido.",
 });
 
+function isValidCalendarDate(value: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return false;
+  }
+
+  const [year, month, day] = value.split("-").map(Number);
+
+  if (year === undefined || month === undefined || day === undefined) {
+    return false;
+  }
+
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day
+  );
+}
+
 const dueDateSchema = z
   .string()
   .trim()
@@ -19,11 +39,7 @@ const dueDateSchema = z
         return true;
       }
 
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-        return false;
-      }
-
-      return !Number.isNaN(Date.parse(`${value}T00:00:00.000Z`));
+      return isValidCalendarDate(value);
     },
     {
       message: "Informe uma data válida.",
