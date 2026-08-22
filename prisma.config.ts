@@ -13,6 +13,6 @@ export default defineConfig({
   },
 
   datasource: {
-    url: env("DATABASE_URL"),
+    url: process.env.DIRECT_URL ?? env("DATABASE_URL"),
   },
 })
