@@ -53,6 +53,7 @@ The holiday calendar is the only public external API integration. Responses are 
 
 - Node.js 22 or newer
 - npm
+- a PostgreSQL database, such as a free Neon project
 
 ### Installation
 
@@ -62,7 +63,7 @@ cd projeto-kanban
 npm ci
 cp .env.example .env
 npx auth secret
-npx prisma migrate dev
+npm run db:deploy
 npm run dev
 ```
 
@@ -72,10 +73,14 @@ Open http://localhost:3000.
 
 | Variable | Purpose |
 | --- | --- |
-| `DATABASE_URL` | Database connection used by Prisma |
+| `DATABASE_URL` | PostgreSQL connection string used by Prisma |
 | `AUTH_SECRET` | Secret used by Auth.js to protect sessions and tokens |
 
 Never commit the real values. Use `.env.example` only as documentation.
+
+Create a free database at [Neon](https://neon.com), copy its pooled PostgreSQL
+connection string to `DATABASE_URL`, and run `npm run db:deploy` once to create
+the application tables.
 
 ## Quality checks
 
