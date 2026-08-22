@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      DATABASE_URL: file:./ci.db
+      DATABASE_URL: postgresql://taskflow:taskflow@localhost:5432/taskflow
       AUTH_SECRET: ci-only-secret-with-at-least-32-characters
 
     steps:
