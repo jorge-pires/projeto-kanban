@@ -113,7 +113,7 @@ export function RegisterForm() {
             autoComplete="new-password"
             placeholder="Crie uma senha"
             required
-            minLength={8}
+            minLength={10}
             maxLength={72}
             aria-invalid={Boolean(passwordError)}
             aria-describedby={
@@ -141,7 +141,7 @@ export function RegisterForm() {
           </p>
         ) : (
           <p id="password-requirements" className="text-sm text-slate-500">
-            Use entre 8 e 72 caracteres.
+            Use entre 10 e 72 caracteres.
           </p>
         )}
       </div>
@@ -161,7 +161,7 @@ export function RegisterForm() {
           autoComplete="new-password"
           placeholder="Digite a senha novamente"
           required
-          minLength={8}
+          minLength={10}
           maxLength={72}
           aria-invalid={Boolean(passwordConfirmationError)}
           aria-describedby={

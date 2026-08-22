@@ -284,7 +284,7 @@ export default async function CalendarPage({
         <a
           href="https://brasilapi.com.br/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="font-semibold text-blue-600 underline-offset-4 hover:underline dark:text-blue-400"
         >
           BrasilAPI
