@@ -77,6 +77,7 @@ describe("getNationalHolidays", () => {
         headers: {
           Accept: "application/json",
         },
+        signal: expect.any(AbortSignal),
         next: {
           revalidate: 60 * 60 * 24,
         },
