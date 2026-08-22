@@ -5,35 +5,16 @@ import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import {
-  taskStatusSchema,
-  taskStatuses,
-  type TaskStatus,
-} from "@/lib/validations/task";
+  hasSequentialTaskPositions,
+  type TaskOrderUpdate,
+} from "@/lib/tasks/board";
+import { taskStatusSchema } from "@/lib/validations/task";
 
-export interface TaskOrderUpdate {
-  id: string;
-  status: TaskStatus;
-  position: number;
-}
+export type { TaskOrderUpdate } from "@/lib/tasks/board";
 
 export interface SaveTaskOrderResult {
   success: boolean;
   message: string;
-}
-
-function hasValidPositions(updates: TaskOrderUpdate[]) {
-  return taskStatuses.every((status) => {
-    const positions = updates
-      .filter((task) => task.status === status)
-      .map((task) => task.position)
-      .sort((firstPosition, secondPosition) => {
-        return firstPosition - secondPosition;
-      });
-
-    return positions.every((position, index) => {
-      return position === index;
-    });
-  });
 }
 
 export async function saveTaskOrder(
@@ -107,7 +88,7 @@ export async function saveTaskOrder(
     );
   });
 
-  if (!hasValidUpdates || !hasValidPositions(updates)) {
+  if (!hasValidUpdates || !hasSequentialTaskPositions(updates)) {
     return {
       success: false,
       message: "A nova ordem das tarefas é inválida.",
