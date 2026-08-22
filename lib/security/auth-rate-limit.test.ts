@@ -82,6 +82,50 @@ describe("authentication rate limiting", () => {
     expect(databaseMocks.update).not.toHaveBeenCalled();
   });
 
+  it("resets an expired attempt window", async () => {
+    databaseMocks.findUnique.mockResolvedValue({
+      id: "attempt-1",
+      attempts: 5,
+      resetAt: new Date(Date.now() - 1_000),
+    });
+
+    const result = await consumeAuthRateLimit({
+      action: "login",
+      identifier: "203.0.113.10",
+      maxAttempts: 5,
+      windowMs: 60_000,
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(databaseMocks.update).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: expect.objectContaining({ attempts: 1 }),
+      }),
+    );
+  });
+
+  it("increments an active window below the limit", async () => {
+    databaseMocks.findUnique.mockResolvedValue({
+      id: "attempt-1",
+      attempts: 2,
+      resetAt: new Date(Date.now() + 60_000),
+    });
+
+    const result = await consumeAuthRateLimit({
+      action: "login",
+      identifier: "203.0.113.10",
+      maxAttempts: 5,
+      windowMs: 60_000,
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(databaseMocks.update).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: expect.objectContaining({ attempts: { increment: 1 } }),
+      }),
+    );
+  });
+
   it("clears only the hashed identifier after a successful login", async () => {
     await clearAuthRateLimit("login", "203.0.113.10");
 

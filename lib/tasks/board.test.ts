@@ -72,6 +72,21 @@ describe("getVisibleTasks", () => {
       "task-2",
     ]);
   });
+
+  it("preserves manual order when tasks have no due date", () => {
+    const withoutDates = tasks.map((task) => ({ ...task, dueDate: null }));
+    const result = getVisibleTasks(withoutDates, {
+      search: "",
+      priority: "all",
+      sort: "due-date",
+    });
+
+    expect(result.map((task) => task.id)).toEqual([
+      "task-1",
+      "task-2",
+      "task-3",
+    ]);
+  });
 });
 
 describe("moveBoardTask", () => {
@@ -96,6 +111,15 @@ describe("moveBoardTask", () => {
     expect(result?.find((task) => task.id === "task-1")?.status).toBe(
       "in-progress",
     );
+  });
+
+  it("moves a task into an empty column", () => {
+    const result = moveBoardTask(tasks, "task-1", "done");
+
+    expect(result?.at(-1)).toMatchObject({
+      id: "task-1",
+      status: "done",
+    });
   });
 
   it("returns null for an unknown task or destination", () => {
