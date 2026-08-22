@@ -221,7 +221,7 @@ export default async function DashboardPage() {
           </Link>
 
           <Link
-            href="/projects/new"
+            href="/projects#new-project"
             className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           >
             Novo projeto
@@ -517,7 +517,7 @@ export default async function DashboardPage() {
             </p>
 
             <Link
-              href="/projects/new"
+              href="/projects#new-project"
               className="mt-6 inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             >
               Criar projeto

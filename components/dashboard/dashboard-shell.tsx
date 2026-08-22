@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
@@ -18,6 +18,8 @@ interface DashboardShellProps {
 
 export function DashboardShell({ children, user }: DashboardShellProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileDialogRef = useRef<HTMLDivElement>(null);
 
   function openMobileMenu() {
     setIsMobileMenuOpen(true);
@@ -25,6 +27,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
 
   function closeMobileMenu() {
     setIsMobileMenuOpen(false);
+    window.requestAnimationFrame(() => menuButtonRef.current?.focus());
   }
 
   useEffect(() => {
@@ -32,16 +35,43 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
       return;
     }
 
-    function handleEscapeKey(event: KeyboardEvent) {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const focusableElements =
+      mobileDialogRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+
+    focusableElements?.[0]?.focus();
+
+    function handleDialogKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         closeMobileMenu();
+        return;
+      }
+
+      if (event.key !== "Tab" || !focusableElements?.length) {
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement?.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement?.focus();
       }
     }
 
-    document.addEventListener("keydown", handleEscapeKey);
+    document.addEventListener("keydown", handleDialogKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleDialogKeyDown);
     };
   }, [isMobileMenuOpen]);
 
@@ -61,6 +91,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
           />
 
           <div
+            ref={mobileDialogRef}
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"
@@ -72,7 +103,11 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
       )}
 
       <div className="lg:pl-64">
-        <DashboardHeader user={user} onOpenMenu={openMobileMenu} />
+        <DashboardHeader
+          user={user}
+          onOpenMenu={openMobileMenu}
+          menuButtonRef={menuButtonRef}
+        />
 
         <main
           id="main-content"
