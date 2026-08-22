@@ -87,7 +87,7 @@ export default async function CalendarPage({
   return (
     <main className="mx-auto max-w-6xl space-y-8">
       <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+        <p className="text-sm font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
           Planejamento
         </p>
 
@@ -136,7 +136,7 @@ export default async function CalendarPage({
                 id="calendar-year"
                 name="year"
                 defaultValue={selectedYear}
-                className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white sm:w-36"
+                className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 sm:w-36 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
               >
                 {supportedYears.map((year) => (
                   <option key={year} value={year}>
@@ -148,7 +148,7 @@ export default async function CalendarPage({
 
             <button
               type="submit"
-              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               Consultar
             </button>
@@ -180,7 +180,7 @@ export default async function CalendarPage({
               aria-labelledby="next-holiday-title"
               className="rounded-2xl border border-blue-200 bg-blue-50 p-6 dark:border-blue-900 dark:bg-blue-950/40"
             >
-              <p className="text-sm font-semibold uppercase tracking-wide text-blue-700 dark:text-blue-300">
+              <p className="text-sm font-semibold tracking-wide text-blue-700 uppercase dark:text-blue-300">
                 Próximo feriado
               </p>
 
@@ -193,7 +193,7 @@ export default async function CalendarPage({
 
               <time
                 dateTime={nextHoliday.date}
-                className="mt-2 block capitalize text-blue-800 dark:text-blue-300"
+                className="mt-2 block text-blue-800 capitalize dark:text-blue-300"
               >
                 {formatHolidayDate(nextHoliday.date)}
               </time>
@@ -220,7 +220,7 @@ export default async function CalendarPage({
 
               <Link
                 href="/tasks?sort=due-date"
-                className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-blue-400 dark:hover:text-blue-300"
               >
                 Conferir prazos →
               </Link>
@@ -240,7 +240,7 @@ export default async function CalendarPage({
                         <div>
                           <time
                             dateTime={holiday.date}
-                            className="text-sm font-semibold capitalize text-blue-600 dark:text-blue-400"
+                            className="text-sm font-semibold text-blue-600 capitalize dark:text-blue-400"
                           >
                             {formatHolidayDate(holiday.date)}
                           </time>
@@ -284,7 +284,7 @@ export default async function CalendarPage({
         <a
           href="https://brasilapi.com.br/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="font-semibold text-blue-600 underline-offset-4 hover:underline dark:text-blue-400"
         >
           BrasilAPI

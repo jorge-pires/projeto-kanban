@@ -26,7 +26,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
         aria-labelledby="error-title"
         className="w-full max-w-lg rounded-2xl border border-red-200 bg-white p-8 text-center shadow-sm"
       >
-        <p className="text-sm font-semibold uppercase tracking-wide text-red-700">
+        <p className="text-sm font-semibold tracking-wide text-red-700 uppercase">
           Erro inesperado
         </p>
 

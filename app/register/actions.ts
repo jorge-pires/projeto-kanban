@@ -1,10 +1,13 @@
 "use server";
 
 import { hash } from "bcryptjs";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import { consumeAuthRateLimit } from "@/lib/security/auth-rate-limit";
+import { getClientIp } from "@/lib/security/client-ip";
 import { registerSchema } from "@/lib/validations/auth";
 
 type RegisterField = "name" | "email" | "password" | "passwordConfirmation";
@@ -33,6 +36,20 @@ export async function registerUser(
   }
 
   const { name, email, password } = validation.data;
+  const requestHeaders = await headers();
+  const rateLimit = await consumeAuthRateLimit({
+    action: "register",
+    identifier: getClientIp(requestHeaders),
+    maxAttempts: 3,
+    windowMs: 60 * 60 * 1000,
+  });
+
+  if (!rateLimit.allowed) {
+    return {
+      message:
+        "Muitas tentativas foram realizadas. Aguarde antes de tentar novamente.",
+    };
+  }
 
   const existingUser = await prisma.user.findUnique({
     where: {
@@ -47,7 +64,7 @@ export async function registerUser(
     return {
       message: "Não foi possível criar a conta.",
       errors: {
-        email: ["Já existe uma conta cadastrada com este e-mail."],
+        email: ["Não foi possível usar este e-mail."],
       },
     };
   }
@@ -73,7 +90,7 @@ export async function registerUser(
       return {
         message: "Não foi possível criar a conta.",
         errors: {
-          email: ["Já existe uma conta cadastrada com este e-mail."],
+          email: ["Não foi possível usar este e-mail."],
         },
       };
     }
