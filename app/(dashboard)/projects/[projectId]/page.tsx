@@ -83,16 +83,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <main className="space-y-8">
-      <header className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:flex-row sm:items-start sm:justify-between">
+      <header className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-start sm:justify-between dark:border-slate-800 dark:bg-slate-900">
         <div>
           <Link
             href="/projects"
-            className="inline-flex min-h-11 items-center text-sm font-medium text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-blue-600 transition hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-blue-400 dark:hover:text-blue-300"
           >
             ← Voltar para projetos
           </Link>
 
-          <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+          <p className="mt-4 text-sm font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
             Quadro Kanban
           </p>
 
@@ -113,7 +113,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <Link
           href={`/projects/${project.id}/edit`}
-          className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
+          className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
         >
           Editar projeto
         </Link>

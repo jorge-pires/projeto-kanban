@@ -1,9 +1,9 @@
 export interface Feature {
-  id: number
-  title: string
-  description: string
-  highlighted?: boolean
-  badgeText?: string
+  id: number;
+  title: string;
+  description: string;
+  highlighted?: boolean;
+  badgeText?: string;
 }
 
 export const features: Feature[] = [
@@ -33,4 +33,4 @@ export const features: Feature[] = [
     description:
       "Use o TaskFlow no computador, tablet ou celular com uma interface responsiva.",
   },
-]
+];

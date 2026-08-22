@@ -59,7 +59,7 @@ export function RegisterForm() {
           maxLength={80}
           aria-invalid={Boolean(nameError)}
           aria-describedby={nameError ? "name-error" : undefined}
-          className="rounded-lg border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
         />
 
         {nameError && (
@@ -87,7 +87,7 @@ export function RegisterForm() {
           required
           aria-invalid={Boolean(emailError)}
           aria-describedby={emailError ? "register-email-error" : undefined}
-          className="rounded-lg border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
         />
 
         {emailError && (
@@ -121,7 +121,7 @@ export function RegisterForm() {
                 ? "register-password-error"
                 : "password-requirements"
             }
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 pr-24 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 pr-24 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
           />
 
           <button
@@ -129,7 +129,7 @@ export function RegisterForm() {
             onClick={togglePasswordVisibility}
             aria-label={isPasswordVisible ? "Ocultar senhas" : "Mostrar senhas"}
             aria-pressed={isPasswordVisible}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md px-2 py-1 text-sm font-medium text-blue-700 transition hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            className="absolute top-1/2 right-3 -translate-y-1/2 rounded-md px-2 py-1 text-sm font-medium text-blue-700 transition hover:bg-blue-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
           >
             {isPasswordVisible ? "Ocultar" : "Mostrar"}
           </button>
@@ -169,7 +169,7 @@ export function RegisterForm() {
               ? "password-confirmation-error"
               : undefined
           }
-          className="rounded-lg border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
         />
 
         {passwordConfirmationError && (

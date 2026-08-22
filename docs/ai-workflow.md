@@ -1,72 +1,54 @@
-# TaskFlow AI-Assisted Development Workflow
+# AI-assisted development workflow
 
-## 1. Understand the task
+AI can accelerate implementation, but the developer remains responsible for
+scope, security and correctness.
 
-Before using AI:
+## 1. Define the change
 
-- identify the expected behavior;
-- locate the likely files;
-- define what must not change;
-- decide how the result will be tested.
+Write the expected behavior, files likely involved, behavior that must remain
+unchanged and the verification method.
 
-## 2. Choose the smallest adequate tool
+## 2. Provide focused context
 
-- Manual editing for trivial changes.
-- Tab for predictable completion.
-- Inline edit for localized changes.
-- Chat for explanation and diagnosis.
-- Agent for coordinated implementation.
+Reference `AGENTS.md`, the affected files and their tests. Never attach `.env`,
+database credentials, user records, tokens or production logs containing
+personal data.
 
-## 3. Prepare the context
+## 3. Ask for evidence
 
-- Attach only relevant files.
-- Never attach secrets.
-- Reference project rules.
-- State allowed files explicitly.
+For diagnosis, request the direct cause, affected code and smallest correction.
+For a feature, request a short plan before multi-file edits.
 
-## 4. Review before implementation
+## 4. Review generated changes
 
-For multi-file work:
+Check every changed line for:
 
-- request a short plan;
-- reject unnecessary dependencies;
-- reject unrelated refactors;
-- confirm the expected files.
+- authorization and validation at server boundaries;
+- Server and Client Component separation;
+- accessible labels, keyboard behavior and focus;
+- unnecessary dependencies or abstractions;
+- unrelated edits and hidden error suppression.
 
-## 5. Review generated code
+## 5. Verify locally
 
-- read every changed line;
-- check imports and types;
-- check Server and Client Component boundaries;
-- check accessibility and security;
-- confirm the scope.
+```bash
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
 
-## 6. Verify
+Run `npm run test:coverage` before a pull request that changes domain or
+security behavior.
 
-Use the smallest adequate verification:
+## 6. Commit and review
 
-- visual test;
-- responsive test;
-- keyboard test;
-- lint;
-- build;
-- database or authentication flow.
+Inspect `git diff`, stage only intended files and use a Conventional Commit in
+English. Prefer a pull request over pushing directly to `main`.
 
-## 7. Commit manually
+## Stop conditions
 
-- inspect `git status`;
-- inspect `git diff`;
-- stage only intended files;
-- use Conventional Commits in English;
-- push only after verification.
-
-## 8. Stop conditions
-
-Stop the Agent when it:
-
-- changes unrelated files;
-- installs unapproved dependencies;
-- repeats failed attempts;
-- hides errors;
-- proposes a larger architecture than requested;
-- completes the requested behavior.
+Stop an AI-assisted change if it requests secrets, bypasses authorization,
+edits generated Prisma code, removes tests to make CI pass, repeatedly retries
+the same failure or expands the architecture without a requirement.

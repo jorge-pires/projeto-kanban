@@ -58,7 +58,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
       <body className="flex min-h-full flex-col font-sans">
         <a
           href="#main-content"
-          className="fixed left-4 top-4 z-50 -translate-y-24 rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
+          className="fixed top-4 left-4 z-50 -translate-y-24 rounded-lg bg-blue-700 px-4 py-3 font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 focus:outline-none"
         >
           Pular para o conteúdo
         </a>

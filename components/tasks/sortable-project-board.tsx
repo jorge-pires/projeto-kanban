@@ -15,9 +15,7 @@ import {
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { useDeferredValue, useMemo, useState, useTransition } from "react";
 
-import {
-  saveTaskOrder,
-} from "@/app/(dashboard)/projects/[projectId]/reorder-task-actions";
+import { saveTaskOrder } from "@/app/(dashboard)/projects/[projectId]/reorder-task-actions";
 import { SortableTaskColumn } from "@/components/tasks/sortable-task-column";
 import {
   TaskBoardToolbar,
@@ -226,7 +224,7 @@ export function SortableProjectBoard({
         <DragOverlay>
           {activeTask ? (
             <div className="w-72 rounded-xl border border-blue-300 bg-white p-4 shadow-2xl dark:border-blue-700 dark:bg-slate-900">
-              <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+              <p className="text-xs font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
                 Movendo tarefa
               </p>
 

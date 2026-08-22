@@ -42,7 +42,9 @@ describe("DashboardShell", () => {
 
     await user.click(menuButton);
 
-    expect(screen.getByRole("dialog", { name: "Menu de navegação" })).toBeVisible();
+    expect(
+      screen.getByRole("dialog", { name: "Menu de navegação" }),
+    ).toBeVisible();
     expect(document.body.style.overflow).toBe("hidden");
 
     await user.keyboard("{Escape}");

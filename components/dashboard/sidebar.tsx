@@ -10,9 +10,7 @@ interface SidebarProps {
   onNavigate?: () => void;
 }
 
-export function Sidebar({
-  onNavigate,
-}: SidebarProps) {
+export function Sidebar({ onNavigate }: SidebarProps) {
   const pathname = usePathname();
 
   return (
@@ -26,9 +24,7 @@ export function Sidebar({
           TaskFlow
         </Link>
 
-        <p className="mt-1 text-xs text-slate-400">
-          Gerenciamento de tarefas
-        </p>
+        <p className="mt-1 text-xs text-slate-400">Gerenciamento de tarefas</p>
       </div>
 
       <nav
@@ -41,7 +37,7 @@ export function Sidebar({
             href={item.href}
             onClick={onNavigate}
             aria-current={pathname === item.href ? "page" : undefined}
-            className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+            className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:outline-none ${
               pathname === item.href
                 ? "bg-blue-600 text-white"
                 : "text-slate-300 hover:bg-slate-800 hover:text-white"

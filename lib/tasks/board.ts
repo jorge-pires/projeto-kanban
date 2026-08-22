@@ -35,9 +35,7 @@ export function getColumnTasks(tasks: BoardTask[], status: TaskStatus) {
   return tasks.filter((task) => task.status === status);
 }
 
-export function createTaskOrderUpdates(
-  tasks: BoardTask[],
-): TaskOrderUpdate[] {
+export function createTaskOrderUpdates(tasks: BoardTask[]): TaskOrderUpdate[] {
   return taskStatuses.flatMap((status) =>
     getColumnTasks(tasks, status).map((task, position) => ({
       id: task.id,

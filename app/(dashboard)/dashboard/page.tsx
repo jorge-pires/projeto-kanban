@@ -197,9 +197,9 @@ export default async function DashboardPage() {
 
   return (
     <main className="mx-auto max-w-7xl space-y-8">
-      <header className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:flex-row sm:items-start sm:justify-between">
+      <header className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-start sm:justify-between dark:border-slate-800 dark:bg-slate-900">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+          <p className="text-sm font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
             Visão geral
           </p>
 
@@ -215,14 +215,14 @@ export default async function DashboardPage() {
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link
             href="/tasks"
-            className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
+            className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
           >
             Ver tarefas
           </Link>
 
           <Link
             href="/projects#new-project"
-            className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             Novo projeto
           </Link>
@@ -305,7 +305,7 @@ export default async function DashboardPage() {
 
             <Link
               href="/tasks"
-              className="shrink-0 text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+              className="shrink-0 text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-blue-400 dark:hover:text-blue-300"
             >
               Ver todas
             </Link>
@@ -319,7 +319,7 @@ export default async function DashboardPage() {
                     <div className="min-w-0">
                       <Link
                         href={`/projects/${task.project.id}/tasks/${task.id}/edit`}
-                        className="block truncate font-semibold text-slate-950 transition hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-white dark:hover:text-blue-300"
+                        className="block truncate font-semibold text-slate-950 transition hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-white dark:hover:text-blue-300"
                       >
                         {task.title}
                       </Link>
@@ -376,7 +376,7 @@ export default async function DashboardPage() {
 
             <Link
               href="/tasks?sort=due-date"
-              className="shrink-0 text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+              className="shrink-0 text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-blue-400 dark:hover:text-blue-300"
             >
               Ver agenda
             </Link>
@@ -392,7 +392,7 @@ export default async function DashboardPage() {
                   <div className="min-w-0">
                     <Link
                       href={`/projects/${task.project.id}/tasks/${task.id}/edit`}
-                      className="block truncate font-semibold text-slate-950 transition hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-white dark:hover:text-blue-300"
+                      className="block truncate font-semibold text-slate-950 transition hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-white dark:hover:text-blue-300"
                     >
                       {task.title}
                     </Link>
@@ -444,7 +444,7 @@ export default async function DashboardPage() {
 
           <Link
             href="/projects"
-            className="shrink-0 text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+            className="shrink-0 text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-blue-400 dark:hover:text-blue-300"
           >
             Ver projetos
           </Link>
@@ -471,7 +471,7 @@ export default async function DashboardPage() {
                     <div className="min-w-0">
                       <Link
                         href={`/projects/${project.id}`}
-                        className="block truncate text-lg font-semibold text-slate-950 transition hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-white dark:hover:text-blue-300"
+                        className="block truncate text-lg font-semibold text-slate-950 transition hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-white dark:hover:text-blue-300"
                       >
                         {project.name}
                       </Link>
@@ -518,7 +518,7 @@ export default async function DashboardPage() {
 
             <Link
               href="/projects#new-project"
-              className="mt-6 inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              className="mt-6 inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               Criar projeto
             </Link>
