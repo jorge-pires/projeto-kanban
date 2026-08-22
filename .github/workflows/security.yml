@@ -12,19 +12,25 @@ permissions:
   contents: read
 
 jobs:
-  dependency-review:
-    if: github.event_name == 'pull_request'
-    name: Dependency review
+  dependency-audit:
+    name: Dependency audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Review dependency changes
-        uses: actions/dependency-review-action@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
-          fail-on-severity: moderate
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=moderate
 
   codeql:
     name: CodeQL

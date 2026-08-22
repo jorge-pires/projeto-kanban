@@ -74,7 +74,7 @@ detalhado.
 - Content Security Policy e cabeçalhos HTTP defensivos;
 - validação de entrada no servidor e restrições de integridade no PostgreSQL;
 - TLS entre cliente, Vercel e Neon;
-- Dependabot, Dependency Review e CodeQL.
+- Dependabot, auditoria de dependências com `npm audit` e CodeQL.
 
 Segurança é um processo contínuo, não uma garantia absoluta. Consulte
 [SECURITY.md](SECURITY.md) para relatar vulnerabilidades.
