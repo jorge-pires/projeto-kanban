@@ -1,0 +1,10 @@
+CREATE TABLE "RateLimitEntry" (
+    "key" TEXT NOT NULL,
+    "attempts" INTEGER NOT NULL DEFAULT 1,
+    "resetAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    CONSTRAINT "RateLimitEntry_pkey" PRIMARY KEY ("key")
+);
+
+CREATE INDEX "RateLimitEntry_resetAt_idx" ON "RateLimitEntry"("resetAt");
