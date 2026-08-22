@@ -1,8 +1,9 @@
 "use client";
 
-export type PriorityFilter = "all" | "low" | "medium" | "high";
-
-export type TaskSortOption = "manual" | "due-date" | "priority";
+import type {
+  PriorityFilter,
+  TaskSortOption,
+} from "@/lib/tasks/board";
 
 interface TaskBoardToolbarProps {
   search: string;

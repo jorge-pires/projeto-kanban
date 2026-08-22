@@ -4,7 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import { ProjectTaskCard } from "@/components/tasks/project-task-card";
-import type { BoardTask } from "@/components/tasks/sortable-project-board";
+import type { BoardTask } from "@/lib/tasks/board";
 
 interface SortableTaskCardProps {
   task: BoardTask;

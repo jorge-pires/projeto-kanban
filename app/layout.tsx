@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://projeto-kanban-pi.vercel.app"),
   title: {
     default: "TaskFlow",
     template: "%s | TaskFlow",
@@ -37,6 +38,18 @@ export const metadata: Metadata = {
     "gestão de projetos",
     "produtividade",
   ],
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    title: "TaskFlow — Kanban acessível",
+    description:
+      "Organize projetos e tarefas em um quadro Kanban simples, acessível e responsivo.",
+    siteName: "TaskFlow",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export const viewport: Viewport = {
