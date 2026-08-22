@@ -3,7 +3,15 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 import { prisma } from "@/lib/prisma";
+import {
+  clearRateLimit,
+  consumeRateLimit,
+  getClientAddress,
+} from "@/lib/security/rate-limit";
 import { loginSchema } from "@/lib/validations/auth";
+
+const DUMMY_PASSWORD_HASH =
+  "$2b$12$yePPOCduFTZ9.xDeozcc2.Biec9ja/nu1uhie1X6RAV7Q1KJBv/Yy";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   pages: {
@@ -27,7 +35,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         },
       },
 
-      async authorize(credentials) {
+      async authorize(credentials, request) {
         const validation = loginSchema.safeParse(credentials);
 
         if (!validation.success) {
@@ -35,6 +43,26 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         }
 
         const { email, password } = validation.data;
+        const clientAddress = getClientAddress(request.headers);
+
+        const [accountLimit, addressLimit] = await Promise.all([
+          consumeRateLimit({
+            scope: "login-account",
+            identifier: email,
+            limit: 5,
+            windowMs: 15 * 60 * 1_000,
+          }),
+          consumeRateLimit({
+            scope: "login-address",
+            identifier: clientAddress,
+            limit: 20,
+            windowMs: 15 * 60 * 1_000,
+          }),
+        ]);
+
+        if (!accountLimit.allowed || !addressLimit.allowed) {
+          return null;
+        }
 
         const user = await prisma.user.findUnique({
           where: {
@@ -42,15 +70,16 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           },
         });
 
-        if (!user) {
+        const passwordMatches = await compare(
+          password,
+          user?.passwordHash ?? DUMMY_PASSWORD_HASH,
+        );
+
+        if (!user || !passwordMatches) {
           return null;
         }
 
-        const passwordMatches = await compare(password, user.passwordHash);
-
-        if (!passwordMatches) {
-          return null;
-        }
+        await clearRateLimit("login-account", email);
 
         return {
           id: user.id,

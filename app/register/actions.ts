@@ -1,10 +1,15 @@
 "use server";
 
 import { hash } from "bcryptjs";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import {
+  consumeRateLimit,
+  getClientAddress,
+} from "@/lib/security/rate-limit";
 import { registerSchema } from "@/lib/validations/auth";
 
 type RegisterField = "name" | "email" | "password" | "passwordConfirmation";
@@ -18,6 +23,20 @@ export async function registerUser(
   _previousState: RegisterActionState,
   formData: FormData,
 ): Promise<RegisterActionState> {
+  const requestHeaders = await headers();
+  const rateLimit = await consumeRateLimit({
+    scope: "registration-address",
+    identifier: getClientAddress(requestHeaders),
+    limit: 5,
+    windowMs: 60 * 60 * 1_000,
+  });
+
+  if (!rateLimit.allowed) {
+    return {
+      message: "Muitas tentativas foram realizadas. Aguarde e tente novamente.",
+    };
+  }
+
   const validation = registerSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -45,10 +64,8 @@ export async function registerUser(
 
   if (existingUser) {
     return {
-      message: "Não foi possível criar a conta.",
-      errors: {
-        email: ["Já existe uma conta cadastrada com este e-mail."],
-      },
+      message:
+        "Não foi possível concluir o cadastro com os dados informados.",
     };
   }
 
@@ -71,10 +88,8 @@ export async function registerUser(
       error.code === "P2002"
     ) {
       return {
-        message: "Não foi possível criar a conta.",
-        errors: {
-          email: ["Já existe uma conta cadastrada com este e-mail."],
-        },
+        message:
+          "Não foi possível concluir o cadastro com os dados informados.",
       };
     }
 
