@@ -55,7 +55,7 @@ export default async function EditTaskPage({ params }: EditTaskPageProps) {
       <nav aria-label="Navegação estrutural">
         <Link
           href={`/projects/${projectId}`}
-          className="inline-flex rounded-md text-sm font-medium text-blue-700 hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+          className="inline-flex rounded-md text-sm font-medium text-blue-700 hover:text-blue-900 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
         >
           ← Voltar para o projeto
         </Link>

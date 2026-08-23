@@ -6,14 +6,19 @@ const emailSchema = z
   .toLowerCase()
   .email("Informe um e-mail válido.");
 
-const passwordSchema = z
+const loginPasswordSchema = z
   .string()
-  .min(8, "A senha deve ter pelo menos 8 caracteres.")
+  .min(1, "Informe sua senha.")
+  .max(72, "A senha deve ter no máximo 72 caracteres.");
+
+const registrationPasswordSchema = z
+  .string()
+  .min(10, "A senha deve ter pelo menos 10 caracteres.")
   .max(72, "A senha deve ter no máximo 72 caracteres.");
 
 export const loginSchema = z.object({
   email: emailSchema,
-  password: passwordSchema,
+  password: loginPasswordSchema,
 });
 
 export const registerSchema = z
@@ -24,7 +29,7 @@ export const registerSchema = z
       .min(2, "O nome deve ter pelo menos 2 caracteres.")
       .max(80, "O nome deve ter no máximo 80 caracteres."),
     email: emailSchema,
-    password: passwordSchema,
+    password: registrationPasswordSchema,
     passwordConfirmation: z.string(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {

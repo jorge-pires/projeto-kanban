@@ -51,7 +51,7 @@ export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
         <button
           type="button"
           onClick={() => onEdit(task)}
-          className="rounded-lg border px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="rounded-lg border px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus:ring-2 focus:ring-blue-600 focus:outline-none"
         >
           Editar
         </button>
@@ -59,7 +59,7 @@ export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
         <button
           type="button"
           onClick={() => onDelete(task.id)}
-          className="rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-600"
+          className="rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition hover:bg-red-50 focus:ring-2 focus:ring-red-600 focus:outline-none"
         >
           Excluir
         </button>

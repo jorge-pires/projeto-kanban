@@ -160,7 +160,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
   return (
     <main className="mx-auto max-w-7xl space-y-8">
       <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+        <p className="text-sm font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
           Organização
         </p>
 
@@ -210,7 +210,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
               type="search"
               defaultValue={search}
               placeholder="Tarefa, descrição ou projeto"
-              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500"
+              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500"
             />
           </div>
 
@@ -226,7 +226,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
               id="status"
               name="status"
               defaultValue={status}
-              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
             >
               <option value="">Todos os status</option>
               <option value="todo">A fazer</option>
@@ -249,7 +249,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
               id="priority"
               name="priority"
               defaultValue={priority}
-              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
             >
               <option value="">Todas as prioridades</option>
 
@@ -271,7 +271,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
               id="sort"
               name="sort"
               defaultValue={sort}
-              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+              className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-950 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
             >
               <option value="recent">Atualização recente</option>
 
@@ -287,7 +287,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
             {hasActiveFilters ? (
               <Link
                 href="/tasks"
-                className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
+                className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
               >
                 Limpar filtros
               </Link>
@@ -295,7 +295,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
 
             <button
               type="submit"
-              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+              className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               Aplicar filtros
             </button>
@@ -325,7 +325,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
 
           <Link
             href="/projects"
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+            className="inline-flex min-h-11 items-center text-sm font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-blue-400 dark:hover:text-blue-300"
           >
             Ver projetos →
           </Link>
@@ -344,13 +344,13 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
                 <article key={task.id} className="flex flex-col gap-3">
                   <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-900">
                     <div className="min-w-0">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                      <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
                         Projeto
                       </p>
 
                       <Link
                         href={`/projects/${task.project.id}`}
-                        className="mt-1 block truncate font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:text-blue-400 dark:hover:text-blue-300"
+                        className="mt-1 block truncate font-semibold text-blue-600 transition hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-blue-400 dark:hover:text-blue-300"
                       >
                         {task.project.name}
                       </Link>
@@ -390,7 +390,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
               {hasActiveFilters ? (
                 <Link
                   href="/tasks"
-                  className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
+                  className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-blue-400 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none dark:border-slate-700 dark:text-slate-200 dark:hover:border-blue-600 dark:hover:text-blue-300"
                 >
                   Limpar filtros
                 </Link>
@@ -398,7 +398,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
 
               <Link
                 href="/projects"
-                className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none"
               >
                 Ir para projetos
               </Link>

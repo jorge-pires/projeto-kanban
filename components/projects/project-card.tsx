@@ -88,7 +88,7 @@ export function ProjectCard({
           <Link
             href={`/projects/${id}`}
             aria-label={`Abrir o projeto ${name}`}
-            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
           >
             Abrir
           </Link>
@@ -96,7 +96,7 @@ export function ProjectCard({
           <Link
             href={`/projects/${id}/edit`}
             aria-label={`Editar o projeto ${name}`}
-            className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
           >
             Editar
           </Link>

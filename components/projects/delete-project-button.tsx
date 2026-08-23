@@ -25,7 +25,7 @@ function ConfirmDeleteButton() {
       type="submit"
       disabled={pending}
       aria-disabled={pending}
-      className="rounded-xl bg-red-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+      className="rounded-xl bg-red-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-red-700 focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Excluindo..." : "Confirmar exclusão"}
     </button>
@@ -47,7 +47,7 @@ export function DeleteProjectButton({
       <button
         type="button"
         onClick={() => setIsConfirmationVisible(true)}
-        className="rounded-xl border border-red-300 px-4 py-3 text-sm font-medium text-red-700 transition hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2"
+        className="rounded-xl border border-red-300 px-4 py-3 text-sm font-medium text-red-700 transition hover:bg-red-50 focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:outline-none"
       >
         Excluir projeto
       </button>
@@ -78,7 +78,7 @@ export function DeleteProjectButton({
         <button
           type="button"
           onClick={() => setIsConfirmationVisible(false)}
-          className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+          className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
         >
           Cancelar
         </button>

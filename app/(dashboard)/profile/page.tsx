@@ -67,7 +67,7 @@ export default async function ProfilePage() {
   return (
     <main className="mx-auto max-w-5xl space-y-8">
       <header className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+        <p className="text-sm font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
           Conta
         </p>
 
@@ -123,7 +123,7 @@ export default async function ProfilePage() {
                 {user.name}
               </p>
 
-              <p className="mt-1 break-all text-sm text-slate-500 dark:text-slate-400">
+              <p className="mt-1 text-sm break-all text-slate-500 dark:text-slate-400">
                 {user.email}
               </p>
             </div>

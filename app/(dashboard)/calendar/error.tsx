@@ -20,7 +20,7 @@ export default function CalendarError({ error, reset }: CalendarErrorProps) {
         role="alert"
         className="rounded-2xl border border-red-200 bg-red-50 p-8 text-center dark:border-red-900 dark:bg-red-950/40"
       >
-        <p className="text-sm font-semibold uppercase tracking-wide text-red-700 dark:text-red-300">
+        <p className="text-sm font-semibold tracking-wide text-red-700 uppercase dark:text-red-300">
           Erro inesperado
         </p>
 
@@ -36,7 +36,7 @@ export default function CalendarError({ error, reset }: CalendarErrorProps) {
         <button
           type="button"
           onClick={reset}
-          className="mt-6 inline-flex min-h-11 items-center justify-center rounded-lg bg-red-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-2"
+          className="mt-6 inline-flex min-h-11 items-center justify-center rounded-lg bg-red-700 px-5 py-2 text-sm font-semibold text-white transition hover:bg-red-800 focus-visible:ring-2 focus-visible:ring-red-700 focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           Tentar novamente
         </button>

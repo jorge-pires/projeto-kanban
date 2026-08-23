@@ -1,77 +1,65 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
-import { CreateTaskDialog } from "@/components/kanban/create-task-dialog"
-import { KanbanBoard } from "@/components/kanban/kanban-board"
-import { Button } from "@/components/ui/Button"
+import { CreateTaskDialog } from "@/components/kanban/create-task-dialog";
+import { KanbanBoard } from "@/components/kanban/kanban-board";
+import { Button } from "@/components/ui/Button";
 
-import type { Task } from "@/types/task"
+import type { Task } from "@/types/task";
 
 interface TaskWorkspaceProps {
-  initialTasks: Task[]
+  initialTasks: Task[];
 }
 
-export function TaskWorkspace({
-  initialTasks,
-}: TaskWorkspaceProps) {
-  const [tasks, setTasks] =
-    useState<Task[]>(initialTasks)
+export function TaskWorkspace({ initialTasks }: TaskWorkspaceProps) {
+  const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
-  const [isTaskDialogOpen, setIsTaskDialogOpen] =
-    useState(false)
+  const [isTaskDialogOpen, setIsTaskDialogOpen] = useState(false);
 
-  const [editingTask, setEditingTask] =
-    useState<Task | null>(null)
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   function openCreateTaskDialog() {
-    setEditingTask(null)
-    setIsTaskDialogOpen(true)
+    setEditingTask(null);
+    setIsTaskDialogOpen(true);
   }
 
   function openEditTaskDialog(task: Task) {
-    setEditingTask(task)
-    setIsTaskDialogOpen(true)
+    setEditingTask(task);
+    setIsTaskDialogOpen(true);
   }
 
   function closeTaskDialog() {
-    setIsTaskDialogOpen(false)
-    setEditingTask(null)
+    setIsTaskDialogOpen(false);
+    setEditingTask(null);
   }
 
   function saveTask(task: Task) {
     if (editingTask) {
       setTasks((currentTasks) =>
         currentTasks.map((currentTask) =>
-          currentTask.id === task.id
-            ? task
-            : currentTask
-        )
-      )
+          currentTask.id === task.id ? task : currentTask,
+        ),
+      );
 
-      return
+      return;
     }
 
-    setTasks((currentTasks) => [
-      ...currentTasks,
-      task,
-    ])
+    setTasks((currentTasks) => [...currentTasks, task]);
   }
 
   function deleteTask(taskId: string) {
     const shouldDelete = window.confirm(
-      "Deseja realmente excluir esta tarefa?"
-    )
+      "Deseja realmente excluir esta tarefa?",
+    );
 
     if (!shouldDelete) {
-      return
+      return;
     }
 
     setTasks((currentTasks) =>
-      currentTasks.filter(
-        (task) => task.id !== taskId
-      )
-    )
+      currentTasks.filter((task) => task.id !== taskId),
+    );
   }
 
   return (
@@ -83,9 +71,8 @@ export function TaskWorkspace({
           </h1>
 
           <p className="mt-3 max-w-2xl text-gray-600">
-            Organize suas atividades em um fluxo
-            Kanban e acompanhe o progresso de cada
-            tarefa.
+            Organize suas atividades em um fluxo Kanban e acompanhe o progresso
+            de cada tarefa.
           </p>
         </div>
 
@@ -99,10 +86,7 @@ export function TaskWorkspace({
         </Button>
       </div>
 
-      <section
-        aria-label="Quadro Kanban de tarefas"
-        className="mt-8"
-      >
+      <section aria-label="Quadro Kanban de tarefas" className="mt-8">
         <KanbanBoard
           tasks={tasks}
           onEditTask={openEditTaskDialog}
@@ -118,5 +102,5 @@ export function TaskWorkspace({
         />
       )}
     </>
-  )
+  );
 }

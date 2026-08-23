@@ -51,7 +51,7 @@ export default async function EditProjectPage({
       <nav aria-label="Navegação estrutural">
         <Link
           href={`/projects/${project.id}`}
-          className="inline-flex rounded-md text-sm font-medium text-blue-700 transition hover:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+          className="inline-flex rounded-md text-sm font-medium text-blue-700 transition hover:text-blue-900 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none"
         >
           ← Voltar para o projeto
         </Link>

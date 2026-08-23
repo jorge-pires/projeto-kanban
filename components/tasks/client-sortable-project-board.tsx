@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 
-import type { BoardTask } from "@/components/tasks/sortable-project-board";
+import type { BoardTask } from "@/lib/tasks/board";
 
 interface ClientSortableProjectBoardProps {
   projectId: string;

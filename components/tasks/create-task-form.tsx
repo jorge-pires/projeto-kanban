@@ -100,7 +100,7 @@ export function CreateTaskForm({ projectId }: CreateTaskFormProps) {
             maxLength={100}
             aria-invalid={Boolean(titleError)}
             aria-describedby={titleError ? "task-title-error" : undefined}
-            className="rounded-lg border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+            className="rounded-lg border border-slate-300 px-4 py-3 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
           />
 
           {titleError && (
@@ -131,7 +131,7 @@ export function CreateTaskForm({ projectId }: CreateTaskFormProps) {
                 ? "task-description-error"
                 : "task-description-help"
             }
-            className="resize-y rounded-lg border border-slate-300 px-4 py-3 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+            className="resize-y rounded-lg border border-slate-300 px-4 py-3 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
           />
 
           {descriptionError ? (
@@ -159,7 +159,7 @@ export function CreateTaskForm({ projectId }: CreateTaskFormProps) {
             defaultValue="medium"
             aria-invalid={Boolean(priorityError)}
             aria-describedby={priorityError ? "task-priority-error" : undefined}
-            className="rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+            className="rounded-lg border border-slate-300 bg-white px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
           >
             <option value="low">Baixa</option>
 
@@ -189,7 +189,7 @@ export function CreateTaskForm({ projectId }: CreateTaskFormProps) {
             type="date"
             aria-invalid={Boolean(dueDateError)}
             aria-describedby={dueDateError ? "task-due-date-error" : undefined}
-            className="rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+            className="rounded-lg border border-slate-300 px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
           />
 
           {dueDateError && (

@@ -3,15 +3,26 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 import { prisma } from "@/lib/prisma";
+import { getServerEnv } from "@/lib/env";
+import {
+  clearAuthRateLimit,
+  consumeAuthRateLimit,
+} from "@/lib/security/auth-rate-limit";
+import { getClientIp } from "@/lib/security/client-ip";
 import { loginSchema } from "@/lib/validations/auth";
 
+const DUMMY_PASSWORD_HASH =
+  "$2b$12$p.dWFseQ/vV1p9egTrDoFOkhBYAInx56j/Nrdi2zi/s91dHfDgq2y";
+
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  secret: getServerEnv().AUTH_SECRET,
   pages: {
     signIn: "/login",
   },
 
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60 * 8,
   },
 
   providers: [
@@ -27,7 +38,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         },
       },
 
-      async authorize(credentials) {
+      async authorize(credentials, request) {
         const validation = loginSchema.safeParse(credentials);
 
         if (!validation.success) {
@@ -35,6 +46,17 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         }
 
         const { email, password } = validation.data;
+        const clientIp = getClientIp(request.headers);
+        const rateLimit = await consumeAuthRateLimit({
+          action: "login",
+          identifier: clientIp,
+          maxAttempts: 5,
+          windowMs: 15 * 60 * 1000,
+        });
+
+        if (!rateLimit.allowed) {
+          return null;
+        }
 
         const user = await prisma.user.findUnique({
           where: {
@@ -43,6 +65,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         });
 
         if (!user) {
+          await compare(password, DUMMY_PASSWORD_HASH);
           return null;
         }
 
@@ -51,6 +74,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         if (!passwordMatches) {
           return null;
         }
+
+        await clearAuthRateLimit("login", clientIp);
 
         return {
           id: user.id,

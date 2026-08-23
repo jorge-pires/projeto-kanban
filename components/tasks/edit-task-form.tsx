@@ -83,7 +83,7 @@ export function EditTaskForm({ projectId, task }: EditTaskFormProps) {
           maxLength={100}
           aria-invalid={Boolean(titleError)}
           aria-describedby={titleError ? "edit-task-title-error" : undefined}
-          className="rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
         />
 
         {titleError && (
@@ -114,7 +114,7 @@ export function EditTaskForm({ projectId, task }: EditTaskFormProps) {
               ? "edit-task-description-error"
               : "edit-task-description-help"
           }
-          className="resize-y rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+          className="resize-y rounded-lg border border-slate-300 px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
         />
 
         {descriptionError ? (

@@ -93,7 +93,7 @@ export function CreateTaskDialog({
             type="button"
             onClick={onClose}
             aria-label="Fechar"
-            className="rounded-lg px-3 py-2 text-sm text-gray-500 transition hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="rounded-lg px-3 py-2 text-sm text-gray-500 transition hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-blue-600 focus:outline-none"
           >
             Fechar
           </button>
@@ -121,7 +121,7 @@ export function CreateTaskDialog({
               placeholder="Ex.: Criar tela de configurações"
               autoFocus
               required
-              className="rounded-lg border px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+              className="rounded-lg border px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
             />
           </div>
 
@@ -141,7 +141,7 @@ export function CreateTaskDialog({
               placeholder="Descreva o que precisa ser feito."
               rows={4}
               required
-              className="resize-none rounded-lg border px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+              className="resize-none rounded-lg border px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
             />
           </div>
 
@@ -161,7 +161,7 @@ export function CreateTaskDialog({
                 onChange={(event) =>
                   setPriority(event.target.value as TaskPriority)
                 }
-                className="rounded-lg border bg-white px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                className="rounded-lg border bg-white px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
               >
                 <option value="low">Baixa</option>
 
@@ -186,7 +186,7 @@ export function CreateTaskDialog({
                 value={dueDate}
                 onChange={(event) => setDueDate(event.target.value)}
                 required
-                className="rounded-lg border px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                className="rounded-lg border px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
               />
             </div>
           </div>

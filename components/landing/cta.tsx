@@ -1,4 +1,4 @@
-import { ButtonLink } from "@/components/ui/button-link"
+import { ButtonLink } from "@/components/ui/button-link";
 
 export function CTA() {
   return (
@@ -11,13 +11,9 @@ export function CTA() {
         Comece agora e transforme a forma como você acompanha suas atividades.
       </p>
 
-      <ButtonLink
-        href="/login"
-        size="lg"
-        className="mt-8"
-      >
+      <ButtonLink href="/login" size="lg" className="mt-8">
         Começar agora
       </ButtonLink>
     </section>
-  )
+  );
 }

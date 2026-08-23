@@ -44,3 +44,4 @@ test-results/
 # Generated database files
 prisma/dev.db
 prisma/dev.db-journal
+generated/

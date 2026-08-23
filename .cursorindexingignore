@@ -9,6 +9,7 @@ reports/
 coverage/
 playwright-report/
 test-results/
+generated/
 
 # Lockfile is useful for package management,
 # but rarely useful for semantic code search

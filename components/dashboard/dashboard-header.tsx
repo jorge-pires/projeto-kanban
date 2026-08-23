@@ -1,3 +1,5 @@
+import type { RefObject } from "react";
+
 import { LogoutButton } from "@/components/auth/logout-button";
 
 interface DashboardHeaderUser {
@@ -8,6 +10,7 @@ interface DashboardHeaderUser {
 interface DashboardHeaderProps {
   user: DashboardHeaderUser;
   onOpenMenu: () => void;
+  menuButtonRef: RefObject<HTMLButtonElement | null>;
 }
 
 function getUserInitials(name: string) {
@@ -22,17 +25,22 @@ function getUserInitials(name: string) {
   return initials || "U";
 }
 
-export function DashboardHeader({ user, onOpenMenu }: DashboardHeaderProps) {
+export function DashboardHeader({
+  user,
+  onOpenMenu,
+  menuButtonRef,
+}: DashboardHeaderProps) {
   const initials = getUserInitials(user.name);
 
   return (
     <header className="flex min-h-16 items-center justify-between gap-4 border-b border-slate-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex min-w-0 items-center gap-3">
         <button
+          ref={menuButtonRef}
           type="button"
           onClick={onOpenMenu}
           aria-label="Abrir menu de navegação"
-          className="shrink-0 rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 lg:hidden"
+          className="shrink-0 rounded-lg border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none lg:hidden"
         >
           Menu
         </button>

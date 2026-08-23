@@ -7,7 +7,7 @@ import {
 } from "@dnd-kit/sortable";
 
 import { SortableTaskCard } from "@/components/tasks/sortable-task-card";
-import type { BoardTask } from "@/components/tasks/sortable-project-board";
+import type { BoardTask } from "@/lib/tasks/board";
 import type { TaskStatus } from "@/lib/validations/task";
 
 interface SortableTaskColumnProps {

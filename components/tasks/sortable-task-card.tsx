@@ -4,7 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 import { ProjectTaskCard } from "@/components/tasks/project-task-card";
-import type { BoardTask } from "@/components/tasks/sortable-project-board";
+import type { BoardTask } from "@/lib/tasks/board";
 
 interface SortableTaskCardProps {
   task: BoardTask;
@@ -42,7 +42,7 @@ export function SortableTaskCard({ task, disabled }: SortableTaskCardProps) {
       <button
         type="button"
         disabled={disabled}
-        className="mb-2 flex min-h-11 w-full cursor-grab items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-blue-700 dark:hover:bg-blue-950 dark:hover:text-blue-300"
+        className="mb-2 flex min-h-11 w-full cursor-grab items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none active:cursor-grabbing disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-blue-700 dark:hover:bg-blue-950 dark:hover:text-blue-300"
         aria-label={`Arrastar tarefa: ${task.title}`}
         {...attributes}
         {...listeners}

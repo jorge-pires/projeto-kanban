@@ -1,7 +1,7 @@
 export interface NavigationLink {
-  label: string
-  href: string
-  external?: boolean
+  label: string;
+  href: string;
+  external?: boolean;
 }
 
 export const navigationLinks: NavigationLink[] = [
@@ -22,4 +22,4 @@ export const navigationLinks: NavigationLink[] = [
     href: "https://github.com/jorge-pires/projeto-kanban",
     external: true,
   },
-]
+];

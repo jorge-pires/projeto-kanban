@@ -85,7 +85,7 @@ function MoveSubmitButton({ option }: { option: MoveOption }) {
       type="submit"
       disabled={pending}
       aria-disabled={pending}
-      className={`inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 ${variantClass}`}
+      className={`inline-flex flex-1 items-center justify-center rounded-lg px-3 py-2 text-sm font-medium transition focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 ${variantClass}`}
     >
       {pending ? option.pendingLabel : option.label}
     </button>

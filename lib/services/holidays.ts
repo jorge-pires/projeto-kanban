@@ -34,6 +34,7 @@ export async function getNationalHolidays(
         headers: {
           Accept: "application/json",
         },
+        signal: AbortSignal.timeout(5_000),
         next: {
           revalidate: 60 * 60 * 24,
         },

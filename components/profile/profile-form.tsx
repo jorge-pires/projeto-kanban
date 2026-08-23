@@ -26,7 +26,7 @@ function ProfileSubmitButton() {
       type="submit"
       disabled={pending}
       aria-disabled={pending}
-      className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Salvando..." : "Salvar alterações"}
     </button>
@@ -62,7 +62,7 @@ export function ProfileForm({ name, email }: ProfileFormProps) {
           aria-describedby={
             nameError ? "profile-name-error" : "profile-name-description"
           }
-          className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 aria-invalid:border-red-600 aria-invalid:ring-red-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 aria-invalid:border-red-600 aria-invalid:ring-red-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
 
         {nameError ? (
@@ -103,7 +103,7 @@ export function ProfileForm({ name, email }: ProfileFormProps) {
           aria-describedby={
             emailError ? "profile-email-error" : "profile-email-description"
           }
-          className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 aria-invalid:border-red-600 aria-invalid:ring-red-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          className="min-h-11 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-950 transition outline-none placeholder:text-slate-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 aria-invalid:border-red-600 aria-invalid:ring-red-600/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
         />
 
         {emailError ? (

@@ -98,7 +98,7 @@ export function EditProjectForm({ project }: EditProjectFormProps) {
           maxLength={60}
           aria-invalid={Boolean(nameError)}
           aria-describedby={nameError ? "edit-project-name-error" : undefined}
-          className="rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+          className="rounded-lg border border-slate-300 px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
         />
 
         {nameError && (
@@ -129,7 +129,7 @@ export function EditProjectForm({ project }: EditProjectFormProps) {
               ? "edit-project-description-error"
               : "edit-project-description-help"
           }
-          className="resize-y rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
+          className="resize-y rounded-lg border border-slate-300 px-4 py-3 transition outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 aria-invalid:border-red-600 aria-invalid:ring-red-100"
         />
 
         {descriptionError ? (
@@ -165,7 +165,7 @@ export function EditProjectForm({ project }: EditProjectFormProps) {
                 className="peer sr-only"
               />
 
-              <span className="flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 transition hover:bg-slate-50 peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-100 peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-blue-600 peer-focus-visible:ring-offset-2">
+              <span className="flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 transition peer-checked:border-blue-600 peer-checked:ring-2 peer-checked:ring-blue-100 peer-focus-visible:ring-2 peer-focus-visible:ring-blue-600 peer-focus-visible:ring-offset-2 peer-focus-visible:outline-none hover:bg-slate-50">
                 <span
                   aria-hidden="true"
                   className={`size-4 rounded-full ${option.className}`}
