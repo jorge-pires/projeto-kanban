@@ -101,7 +101,7 @@ O CI executa todas essas verificações em cada pull request para `main`.
 
 ### Pré-requisitos
 
-- Node.js 22;
+- Node.js 24;
 - npm 11;
 - uma conta gratuita no [Neon](https://neon.com/).
 
