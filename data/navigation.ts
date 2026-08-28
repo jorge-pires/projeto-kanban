@@ -14,11 +14,7 @@ export const navigationLinks: NavigationLink[] = [
     href: "#features",
   },
   {
-    label: "Sobre",
-    href: "#about",
-  },
-  {
-    label: "GitHub",
+    label: "Repositório",
     href: "https://github.com/jorge-pires/projeto-kanban",
     external: true,
   },
